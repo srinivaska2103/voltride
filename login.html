@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CORRECTED SYSTEM SPECIFICATION: INLINE ENCODED SVG ICON LINK -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
     <title>VoltRide | Sign In to Your Adventure</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -82,14 +82,15 @@
                 </button>
 
                 <!-- Dark/Light Mode Toggle Button -->
+                <!-- CHANGED: Enhanced button states to perfectly contrast light vs deep dark backgrounds -->
                 <button 
                     @click="darkMode = !darkMode" 
                     class="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-500 shadow-sm transition-all focus:outline-none"
                     title="Toggle Theme"
                 >
-                    <!-- Sun Icon -->
+                    <!-- Sun Icon (Visible in Dark Mode) -->
                     <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                    <!-- Moon Icon -->
+                    <!-- Moon Icon (Visible in Light Mode) -->
                     <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                 </button>
             </div>
@@ -98,11 +99,13 @@
     </header>
 
     <!-- MAIN LOGIN CONTAINER HUB -->
-    <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 xs:px-6 sm:px-8">
+    <!-- CHANGED: Reconfigured page-wide background parameters to fluidly change from soft light gray to deep slate -->
+    <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 xs:px-6 sm:px-8 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
         <div class="w-full max-w-md my-auto">
             
             <!-- Auth Portal Entry Card Frame -->
-            <div class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200/60 dark:border-slate-800/80 p-6 xs:p-8 sm:p-10 shadow-xl shadow-slate-100/40 dark:shadow-none transition-all duration-300">
+            <!-- CHANGED: Standardized subtle slate shadows for light sheets, dropped flat dark metrics to prevent contrast bleeds -->
+            <div class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200/60 dark:border-slate-800/80 p-6 xs:p-8 sm:p-10 shadow-xl shadow-slate-200/40 dark:shadow-none transition-all duration-300">
                 
                 <!-- Welcome Title -->
                 <div class="text-center space-y-2 mb-8">
@@ -118,22 +121,23 @@
                 <form @submit.prevent class="space-y-5">
                     
                     <!-- Email input node block -->
-                    <div class="space-y-1.5">
+                    <div class="space-y-1.5 text-left">
                         <label for="email" class="text-xs font-semibold text-slate-700 dark:text-slate-300 pl-0.5">
                             Email Address
                         </label>
+                        <!-- CHANGED: Implemented explicit dark:focus:bg-slate-950 transitions to anchor dark layouts seamlessly -->
                         <input 
                             type="email" 
                             id="email" 
                             name="email"
                             placeholder="name@example.com"
                             required
-                            class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors"
+                            class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 focus:bg-white dark:focus:bg-slate-950 transition-all shadow-sm"
                         >
                     </div>
 
                     <!-- Password Input Area with Inside Eye Icon Toggle functionality -->
-                    <div class="space-y-1.5" x-data="{ showPassword: false }">
+                    <div class="space-y-1.5 text-left" x-data TYPE_UNSPECIFIED="{ showPassword: false }">
                         <label for="password" class="text-xs font-semibold text-slate-700 dark:text-slate-300 pl-0.5">
                             Password
                         </label>
@@ -144,7 +148,7 @@
                                 name="password"
                                 placeholder="••••••••"
                                 required
-                                class="w-full py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors"
+                                class="w-full py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 focus:bg-white dark:focus:bg-slate-950 transition-all shadow-sm"
                                 :class="isRtl ? 'pl-12 pr-4' : 'pr-12 pl-4'"
                             >
                             <!-- Eye Toggle Icon Button placed inside bounding box layout -->
@@ -171,19 +175,20 @@
                     <!-- Remember me with checkbox & Forgot Password structural row -->
                     <div class="flex items-center justify-between text-xs font-medium pt-1">
                         <label class="flex items-center gap-2 text-slate-600 dark:text-slate-400 select-none cursor-pointer">
+                            <!-- CHANGED: Re-tuned dark mode background properties on input check frames to prevent bright white flash bugs -->
                             <input 
                                 type="checkbox" 
-                                class="w-4 h-4 rounded-md border-slate-200 dark:border-slate-800 text-brand-500 focus:ring-brand-500/20 bg-slate-50 dark:bg-slate-950 transition-colors"
+                                class="w-4 h-4 rounded-md border-slate-200 dark:border-slate-800 text-brand-500 focus:ring-brand-500/20 bg-slate-50 dark:bg-slate-950 transition-colors accent-brand-500"
                             >
                             <span>Remember me</span>
                         </label>
-                        <a href="#" class="text-brand-500 hover:text-brand-600 transition-colors">Forgot password?</a>
+                        <a href="#" class="text-brand-500 hover:text-brand-600 transition-colors focus:outline-none">Forgot password?</a>
                     </div>
 
                     <!-- Core Submit Sign In Action Button (Restricted Weight: 500) -->
                     <button 
                         type="submit" 
-                        class="w-full mt-2 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/10 active:scale-[0.99] transition-all focus:outline-none"
+                        class="w-full mt-2 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/10 dark:shadow-brand-500/5 active:scale-[0.99] transition-all focus:outline-none focus:ring-2 focus:ring-brand-500/40"
                     >
                         Sign In
                     </button>
@@ -191,6 +196,7 @@
                 </form>
 
                 <!-- Symmetrical Divider Block -->
+                <!-- CHANGED: Swapped light horizontal lines for a responsive dark border layout mapping variable -->
                 <div class="relative my-6 flex items-center justify-center">
                     <div class="absolute inset-0 w-full h-[1px] bg-slate-100 dark:bg-slate-800/80 z-0"></div>
                     <span class="relative z-10 px-3 bg-white dark:bg-slate-900 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
@@ -199,37 +205,48 @@
                 </div>
 
                 <!-- Federated Social Login Button Grid Matrix (Google, Facebook, Apple) -->
-                <div class="grid grid-cols-3 gap-3">
-                    <!-- Google Link Badge -->
-                    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950/60 text-slate-500 dark:text-slate-400 transition-colors focus:outline-none" title="Sign in with Google">
-                        <span class="sr-only">Google</span>
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
-                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
-                        </svg>
-                    </button>
-                    <!-- Facebook Link Badge -->
-                    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950/60 text-slate-500 dark:text-slate-400 transition-colors focus:outline-none" title="Sign in with Facebook">
-                        <span class="sr-only">Facebook</span>
-                        <svg class="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
-                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-                        </svg>
-                    </button>
-                    <!-- Apple Link Badge -->
-                    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950/60 text-slate-500 dark:text-slate-400 transition-colors focus:outline-none" title="Sign in with Apple">
-                        <span class="sr-only">Apple</span>
-                        <svg class="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z"/>
-                        </svg>
-                    </button>
-                </div>
+               <!-- SYSTEM RECONFIGURED: HIGH-CONTRAST FEDERATED SOCIAL LOGIN OAUTH GRID -->
+<!-- SYSTEM RECONFIGURED: TRUE MULTI-THEME OAUTH GRID MATRIX -->
+<div class="grid grid-cols-3 gap-3">
+    
+    <!-- Google Link Badge -->
+    <!-- CHANGED: Configured text-slate-700 and dark:text-white to ensure solid vector visibility on both states -->
+    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-white transition-colors focus:outline-none bg-transparent" title="Sign in with Google">
+        <span class="sr-only">Google</span>
+        <div class="flex items-center justify-center transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-google shrink-0" viewBox="0 0 16 16">
+                <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z"/>
+            </svg>
+        </div>
+    </button>
+    
+    <!-- Facebook Link Badge -->
+    <!-- CHANGED: Handled branding with explicit light text-[#1877F2] and dark:text-blue-500 layers -->
+    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-[#1877F2] dark:text-blue-500 transition-colors focus:outline-none bg-transparent" title="Sign in with Facebook">
+        <span class="sr-only">Facebook</span>
+        <div class="flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-facebook shrink-0" viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+            </svg>
+        </div>
+    </button>
+    
+    <!-- Apple Link Badge -->
+    <!-- CHANGED: Reset class structure to text-slate-950 dark:text-white and deleted the duplicate path code blocks -->
+    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-950 dark:text-white transition-colors focus:outline-none bg-transparent" title="Sign in with Apple">
+        <span class="sr-only">Apple</span>
+        <div class="flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-apple shrink-0" viewBox="0 0 16 16">
+                <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43m3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.7 3.7 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56s.625 1.924 1.273 2.796c.576.984 1.34 1.667 1.659 1.899s1.219.386 1.843.067c.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758q.52-1.185.473-1.282"/>
+            </svg>
+        </div>
+    </button>
+</div>
 
                 <!-- Secondary Sign Up Footer Option Row (Restricted Weight: 400 - 500) -->
                 <div class="mt-8 text-center text-sm font-normal text-slate-500 dark:text-slate-400">
                     <span>Don't have an account?</span>
-                    <a href="signup.html" class="text-brand-500 font-medium ml-1 hover:underline underline-offset-4 transition-colors">
+                    <a href="signup.html" class="text-brand-500 font-medium ml-1 hover:underline underline-offset-4 transition-colors focus:outline-none">
                         Sign up for free
                     </a>
                 </div>

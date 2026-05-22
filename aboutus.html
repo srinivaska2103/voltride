@@ -872,7 +872,6 @@
             }"
             x-init="setTimeout(() => { animateCounters() }, 200)"
             <!-- CHANGED: Applied md:grid-cols-6 to establish a balanced tablet layout matrix -->
-            class="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto"
         >
             
             <!-- Metric 1: Happy Riders -->
@@ -913,16 +912,21 @@
 
             <!-- Metric 4: Customer Rating -->
             <!-- CHANGED: Added md:col-span-2 for 768px viewports -->
-            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 text-center flex flex-col justify-between group hover:border-brand-500/30 transition-colors col-span-1 md:col-span-2 lg:col-span-1 shadow-sm">
-                <div class="space-y-2">
-                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="stats[3].label">Customer Rating</div>
-                    <div class="text-2xl xs:text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white flex items-center justify-center gap-1">
-                        <span x-text="stats[3].current.toFixed(1)">0.0</span>
-                        <svg class="w-5 h-5 text-brand-500 fill-currentColor shrink-0 transform -translate-y-0.5" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    </div>
-                </div>
-                <p class="text-[11px] font-normal text-slate-400 dark:text-slate-500 mt-2 leading-relaxed" x-text="stats[3].desc">Five-star feedback loops</p>
-            </div>
+       <!-- SYSTEM RECONFIGURED UNIFORM GREEN RATING METRIC CARD -->
+<div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 text-center flex flex-col justify-between group hover:border-brand-500/30 transition-colors col-span-1 md:col-span-2 lg:col-span-1 shadow-sm">
+    <div class="space-y-2">
+        <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="stats[3].label">Customer Rating</div>
+        <div class="text-2xl xs:text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white flex items-center justify-center gap-1">
+            <span x-text="stats[3].current.toFixed(1)">0.0</span>
+            
+          <!-- LOCKED BRAND-ACCURATE GREEN STAR COMPONENT -->
+<svg class="w-5 h-5 text-emerald-500 fill-emerald-500 shrink-0 transform -translate-y-0.5 transition-all duration-300" viewBox="0 0 20 20">
+    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+</svg>
+        </div>
+    </div>
+    <p class="text-[11px] font-normal text-slate-400 dark:text-slate-500 mt-2 leading-relaxed" x-text="stats[3].desc">Five-star feedback loops</p>
+</div>
 
             <!-- Metric 5: Scenic Routes -->
             <!-- CHANGED: Reconfigured md:col-span-2 to beautifully bridge across the bottom row on tablet screens -->
@@ -1061,75 +1065,82 @@
 
     </div>
 </section>
-<section>
-      <div class="max-w-7xl mx-auto w-full px-4 xs:px-6 sm:px-8 lg:px-12">
+<!-- SYSTEM RECONFIGURED: TRUE FULL-WIDTH ADAPTIVE THEME CTA MODULE -->
+<!-- CHANGED: Swapped wrapper spacing and backgrounds to expand flawlessly edge-to-edge -->
+<section class="w-full bg-slate-50 dark:bg-slate-950 transition-colors duration-300 py-12 sm:py-20 lg:py-24 overflow-hidden select-none">
+    <div class="w-full mx-auto">
             
-            <!-- Dual-Layered Focal Container Box -->
-            <div class="relative rounded-[2.5rem] bg-slate-950 border border-slate-800/80 px-6 py-12 xs:py-16 sm:px-12 sm:py-20 lg:px-16 text-center overflow-hidden shadow-2xl shadow-slate-950/40">
+        <!-- Full-Width Fluid Focal Container Box -->
+        <!-- CHANGED: Dropped max-w limits, rounded margins, and set adaptive light/dark border matrices -->
+        <div class="relative w-full bg-white dark:bg-slate-900/40 border-y border-slate-200/60 dark:border-slate-800/80 px-6 py-16 xs:py-20 sm:px-12 sm:py-24 lg:px-16 text-center shadow-sm dark:shadow-2xl dark:shadow-slate-950/40">
+            
+            <!-- Balanced Ambient Background Gradient Accents tailored for both Light and Dark backgrounds -->
+            <div class="absolute -top-40 -left-40 w-[30rem] h-[30rem] rounded-full bg-brand-500/5 dark:bg-brand-500/10 blur-[100px] pointer-events-none"></div>
+            <div class="absolute -bottom-40 -right-40 w-[30rem] h-[30rem] rounded-full bg-emerald-500/5 dark:bg-emerald-500/10 blur-[100px] pointer-events-none"></div>
+
+            <!-- Core Copy Context -->
+            <div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
                 
-                <!-- High-Fidelity Blurred Ambient Background Gradient Accents -->
-                <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-brand-500/10 blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+                <!-- Micro Campaign Pill Badge -->
+                <span class="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-[11px] font-semibold bg-brand-500/10 text-brand-500 border border-brand-500/20 backdrop-blur-md uppercase tracking-wider mb-6">
+                    Explore Smarter • Ride Greener
+                </span>
 
-                <!-- Core Copy Context -->
-                <div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
+                <!-- Main Segment Headlines (Restricted Font Weight: 600) -->
+                <!-- CHANGED: Configured text-slate-900 to automatically invert to white in dark mode -->
+                <h2 class="text-slate-900 dark:text-white font-semibold tracking-tight text-2xl xs:text-3xl sm:text-4xl md:text-5xl leading-[1.15] sm:leading-tight">
+                    Ready to Ride With Us? <br class="hidden sm:inline">
+                    <span class="text-brand-500">Discover the City Differently.</span>
+                </h2>
+
+                <!-- Explanatory Subheading Support Paragraph (Restricted Font Weight: 400) -->
+                <!-- CHANGED: Applied responsive text-slate-500 to optimize copy legibility on white sheets -->
+                <p class="mt-6 text-slate-500 dark:text-slate-300/90 font-normal text-sm xs:text-base sm:text-lg leading-relaxed max-w-xl">
+                    Your next adventure starts here. Secure your premium high-range electric scooter instantly and experience seamless municipal travel lanes.
+                </p>
+
+                <!-- Fully Responsive CTA Action Buttons (Adapts beautifully across all 5 breakpoints) -->
+                <div class="mt-8 sm:mt-10 w-full max-w-xs sm:max-w-none flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4 xs:px-0">
                     
-                    <!-- Micro Campaign Pill Badge -->
-                    <span class="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-[11px] font-semibold bg-brand-500/10 text-brand-500 border border-brand-500/20 backdrop-blur-md uppercase tracking-wider mb-6">
-                        Explore Smarter • Ride Greener
-                    </span>
+                    <!-- Primary CTA Button: Book a Scooter -->
+                    <a 
+                        href="booknow.html" 
+                        class="w-full sm:w-auto px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/20 active:scale-[0.98] transition-all tracking-wide text-center focus:outline-none"
+                    >
+                        Book a Scooter
+                    </a>
 
-                    <!-- Main Segment Headlines (Restricted Font Weight: 600) -->
-                    <h2 class="text-white font-semibold tracking-tight text-2xl xs:text-3xl sm:text-4xl md:text-5xl leading-[1.15] sm:leading-tight">
-                        Ready to Ride With Us? <br class="hidden sm:inline">
-                        <span class="text-brand-500">Discover the City Differently.</span>
-                    </h2>
-
-                    <!-- Explanatory Subheading Support Paragraph (Restricted Font Weight: 400) -->
-                    <p class="mt-6 text-slate-300/90 font-normal text-sm xs:text-base sm:text-lg leading-relaxed max-w-xl">
-                        Your next adventure starts here. Secure your premium high-range electric scooter instantly and experience seamless municipal travel lanes.
-                    </p>
-
-                    <!-- Fully Responsive CTA Action Buttons (Adapts beautifully across all 5 breakpoints) -->
-                    <div class="mt-8 sm:mt-10 w-full max-w-xs sm:max-w-none flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4 xs:px-0">
-                        
-                        <!-- Primary CTA Button: Book a Scooter -->
-                        <a 
-                            href="booknow.html" 
-                            class="w-full sm:w-auto px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/20 active:scale-[0.98] transition-all tracking-wide text-center"
-                        >
-                            Book a Scooter
-                        </a>
-
-                        <!-- Secondary Info Anchor -->
-                        <a 
-                            href="service.html" 
-                            class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/15 text-white font-medium text-sm rounded-xl border border-white/10 backdrop-blur-md active:scale-[0.98] transition-all tracking-wide text-center"
-                        >
-                            Explore Tour Packages
-                        </a>
-                    </div>
-
-                    <!-- Trust Indicators Grid Frame (Restricted Font Weight: 400) -->
-                    <div class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-400 font-normal tracking-wide border-t border-white/[0.06] w-full pt-6">
-                        <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                            Instant App Unlock
-                        </span>
-                        <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                            Helmets & Safety Gear Included
-                        </span>
-                        <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-                            Flexible Cancellation Loops
-                        </span>
-                    </div>
-
+                    <!-- Secondary Info Anchor -->
+                    <!-- CHANGED: Modified secondary button background values to ensure premium contrast against both light & dark modes -->
+                    <a 
+                        href="service.html" 
+                        class="w-full sm:w-auto px-8 py-4 bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-900 dark:text-white font-medium text-sm rounded-xl border border-slate-200 dark:border-white/10 backdrop-blur-md active:scale-[0.98] transition-all tracking-wide text-center focus:outline-none"
+                    >
+                        Explore Tour Packages
+                    </a>
                 </div>
+
+                <!-- Trust Indicators Grid Frame (Restricted Font Weight: 400) -->
+                <!-- CHANGED: Re-aligned baseline borders and typography to blend cleanly with light framework skins -->
+                <div class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-slate-400 dark:text-slate-500 font-normal tracking-wide border-t border-slate-200 dark:border-white/[0.06] w-full pt-6">
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                        Instant App Unlock
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                        Helmets & Safety Gear Included
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                        Flexible Cancellation Loops
+                    </span>
+                </div>
+
             </div>
-            
         </div>
+        
+    </div>
 </section>
   <!-- FOOTER COMPONENT -->
     <footer class="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">

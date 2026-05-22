@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CORRECTED SYSTEM SPECIFICATION: INLINE ENCODED SVG ICON LINK -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
     <title>VoltRide | Book Your E-Scooter Rental & Experience</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,7 +13,7 @@
     <!-- Premium Clean Font: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -111,7 +111,7 @@
                 <!-- LTR/RTL Layout Toggle Button -->
                 <button 
                     @click="isRtl = !isRtl" 
-                    class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-transparent dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-brand-500 text-xs font-semibold transition-all focus:outline-none"
+                    class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-transparent dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-brand-500 text-xs font-semibold transition-all focus:outline-none"
                     title="Toggle Layout Direction"
                 >
                     <span x-text="isRtl ? 'LTR' : 'RTL'"></span>
@@ -120,7 +120,7 @@
                 <!-- Dark/Light Mode Toggle Button -->
                 <button 
                     @click="darkMode = !darkMode" 
-                    class="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-transparent dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-500 transition-all focus:outline-none"
+                    class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-transparent dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-500 transition-all focus:outline-none"
                     title="Toggle Theme"
                 >
                     <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
@@ -131,17 +131,18 @@
         </div>
     </header>
 
-    <!-- CORE BOOKING PAGE WRAPPER GRID (360px, Mobile, 768px, 1024px, Desktop responsive) -->
-    <main class="flex-grow pt-28 pb-16">
+    <!-- CORE BOOKING PAGE WRAPPER GRID -->
+    <!-- CHANGED: Linked wrapper backgrounds to dynamic slate tokens to clear theme bleed lines -->
+    <main class="flex-grow pt-28 pb-16 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12">
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <!-- LEFT SIDE PANEL: INPUT ACTION STEPS (Takes up 7/12 layout spaces on Desktop) -->
+                <!-- LEFT SIDE PANEL: INPUT ACTION STEPS -->
                 <div class="lg:col-span-7 space-y-6 w-full">
                     
                     <!-- Page Intro Title -->
-                    <div class="space-y-2">
+                    <div class="space-y-2 text-left">
                         <h1 class="text-2xl xs:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
                             Configure Your Ride Pack
                         </h1>
@@ -153,7 +154,7 @@
                     <form @submit.prevent class="space-y-6">
                         
                         <!-- STEP 1: SELECT PRICING RENTAL TIER -->
-                        <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-4">
+                        <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-4 text-left">
                             <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-2">
                                 <span class="w-5 h-5 rounded-md bg-brand-500 text-white flex items-center justify-center text-[10px]">1</span>
                                 <span>Choose Rental Timeline Tier</span>
@@ -164,11 +165,11 @@
                                 <div 
                                     @click="updatePackage('quick', 'Quick Ride Pack', 12)"
                                     class="p-4 rounded-xl border-2 cursor-pointer transition-all flex justify-between items-start select-none"
-                                    :class="selectedPackage === 'quick' ? 'border-brand-500 bg-brand-500/[0.02]' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20'"
+                                    :class="selectedPackage === 'quick' ? 'border-brand-500 bg-brand-500/[0.02] text-slate-900 dark:text-white' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20 text-slate-700 dark:text-slate-300'"
                                 >
                                     <div class="space-y-0.5">
                                         <p class="text-sm font-semibold">Quick Ride</p>
-                                        <p class="text-xs font-normal text-slate-400">1 Hour Continuous</p>
+                                        <p class="text-xs font-normal text-slate-400 dark:text-slate-500">1 Hour Continuous</p>
                                     </div>
                                     <span class="text-sm font-semibold text-brand-500">$12</span>
                                 </div>
@@ -177,11 +178,11 @@
                                 <div 
                                     @click="updatePackage('halfday', 'Half Day Adventure', 35)"
                                     class="p-4 rounded-xl border-2 cursor-pointer transition-all flex justify-between items-start select-none"
-                                    :class="selectedPackage === 'halfday' ? 'border-brand-500 bg-brand-500/[0.02]' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20'"
+                                    :class="selectedPackage === 'halfday' ? 'border-brand-500 bg-brand-500/[0.02] text-slate-900 dark:text-white' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20 text-slate-700 dark:text-slate-300'"
                                 >
                                     <div class="space-y-0.5">
                                         <p class="text-sm font-semibold">Half Day Adventure</p>
-                                        <p class="text-xs font-normal text-slate-400">4 Hours Dedicated</p>
+                                        <p class="text-xs font-normal text-slate-400 dark:text-slate-500">4 Hours Dedicated</p>
                                     </div>
                                     <span class="text-sm font-semibold text-brand-500">$35</span>
                                 </div>
@@ -190,11 +191,11 @@
                                 <div 
                                     @click="updatePackage('fullday', 'Full Day Explorer', 59)"
                                     class="p-4 rounded-xl border-2 cursor-pointer transition-all flex justify-between items-start select-none"
-                                    :class="selectedPackage === 'fullday' ? 'border-brand-500 bg-brand-500/[0.02]' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20'"
+                                    :class="selectedPackage === 'fullday' ? 'border-brand-500 bg-brand-500/[0.02] text-slate-900 dark:text-white' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20 text-slate-700 dark:text-slate-300'"
                                 >
                                     <div class="space-y-0.5">
                                         <p class="text-sm font-semibold">Full Day Explorer</p>
-                                        <p class="text-xs font-normal text-slate-400">24 Hours Unlimited</p>
+                                        <p class="text-xs font-normal text-slate-400 dark:text-slate-500">24 Hours Unlimited</p>
                                     </div>
                                     <span class="text-sm font-semibold text-brand-500">$59</span>
                                 </div>
@@ -203,11 +204,11 @@
                                 <div 
                                     @click="updatePackage('weekend', 'Weekend Package', 99)"
                                     class="p-4 rounded-xl border-2 cursor-pointer transition-all flex justify-between items-start select-none"
-                                    :class="selectedPackage === 'weekend' ? 'border-brand-500 bg-brand-500/[0.02]' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20'"
+                                    :class="selectedPackage === 'weekend' ? 'border-brand-500 bg-brand-500/[0.02] text-slate-900 dark:text-white' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50/50 dark:bg-slate-950/20 text-slate-700 dark:text-slate-300'"
                                 >
                                     <div class="space-y-0.5">
                                         <p class="text-sm font-semibold">Weekend Package</p>
-                                        <p class="text-xs font-normal text-slate-400">2 Complete Days</p>
+                                        <p class="text-xs font-normal text-slate-400 dark:text-slate-500">2 Complete Days</p>
                                     </div>
                                     <span class="text-sm font-semibold text-brand-500">$99</span>
                                 </div>
@@ -215,7 +216,7 @@
                         </div>
 
                         <!-- STEP 2: CHOOSE OPTIONAL ADD-ONS -->
-                        <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-4">
+                        <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-4 text-left">
                             <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-2">
                                 <span class="w-5 h-5 rounded-md bg-brand-500 text-white flex items-center justify-center text-[10px]">2</span>
                                 <span>Add Extra Performance Inclusions</span>
@@ -223,45 +224,45 @@
 
                             <div class="space-y-2.5">
                                 <!-- Upgrade 1 -->
-                                <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/10 cursor-pointer select-none transition-colors hover:bg-slate-50 dark:hover:bg-slate-950/40">
+                                <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/10 cursor-pointer select-none transition-colors hover:bg-slate-50 dark:hover:bg-slate-950/40 text-slate-900 dark:text-white">
                                     <div class="flex items-center gap-3">
-                                        <input type="checkbox" x-model="addons.gopro" class="w-4 h-4 rounded text-brand-500 focus:ring-brand-500/20 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                                        <input type="checkbox" x-model="addons.gopro" class="w-4 h-4 rounded text-brand-500 focus:ring-brand-500/20 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 accent-brand-500">
                                         <div>
                                             <p class="text-sm font-semibold">GoPro Camera Rental</p>
-                                            <p class="text-xs font-normal text-slate-400">Capture 4K ultra-wide ride media files</p>
+                                            <p class="text-xs font-normal text-slate-400 dark:text-slate-500">Capture 4K ultra-wide ride media files</p>
                                         </div>
                                     </div>
-                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">+$15 / day</span>
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded shrink-0">+$15 / day</span>
                                 </label>
 
                                 <!-- Upgrade 2 -->
-                                <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/10 cursor-pointer select-none transition-colors hover:bg-slate-50 dark:hover:bg-slate-950/40">
+                                <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/10 cursor-pointer select-none transition-colors hover:bg-slate-50 dark:hover:bg-slate-950/40 text-slate-900 dark:text-white">
                                     <div class="flex items-center gap-3">
-                                        <input type="checkbox" x-model="addons.helmet" class="w-4 h-4 rounded text-brand-500 focus:ring-brand-500/20 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                                        <input type="checkbox" x-model="addons.helmet" class="w-4 h-4 rounded text-brand-500 focus:ring-brand-500/20 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 accent-brand-500">
                                         <div>
                                             <p class="text-sm font-semibold">Bluetooth Helmet</p>
-                                            <p class="text-xs font-normal text-slate-400">Integrated communications & map audio tracking</p>
+                                            <p class="text-xs font-normal text-slate-400 dark:text-slate-500">Integrated communications & map audio tracking</p>
                                         </div>
                                     </div>
-                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">+$5 / day</span>
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded shrink-0">+$5 / day</span>
                                 </label>
 
                                 <!-- Upgrade 3 -->
-                                <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/10 cursor-pointer select-none transition-colors hover:bg-slate-50 dark:hover:bg-slate-950/40">
+                                <label class="flex items-center justify-between p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/10 cursor-pointer select-none transition-colors hover:bg-slate-50 dark:hover:bg-slate-950/40 text-slate-900 dark:text-white">
                                     <div class="flex items-center gap-3">
-                                        <input type="checkbox" x-model="addons.guide" class="w-4 h-4 rounded text-brand-500 focus:ring-brand-500/20 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                                        <input type="checkbox" x-model="addons.guide" class="w-4 h-4 rounded text-brand-500 focus:ring-brand-500/20 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 accent-brand-500">
                                         <div>
                                             <p class="text-sm font-semibold">Live Local Tour Guide</p>
-                                            <p class="text-xs font-normal text-slate-400">Accompanied regional group orientation pathways</p>
+                                            <p class="text-xs font-normal text-slate-400 dark:text-slate-500">Accompanied regional group orientation pathways</p>
                                         </div>
                                     </div>
-                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">+$25 / tour</span>
+                                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded shrink-0">+$25 / tour</span>
                                 </label>
                             </div>
                         </div>
 
                         <!-- STEP 3: DISPATCH TIMING DETAILS -->
-                        <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-4">
+                        <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-4 text-left">
                             <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-2">
                                 <span class="w-5 h-5 rounded-md bg-brand-500 text-white flex items-center justify-center text-[10px]">3</span>
                                 <span>Schedule Ride Dispatch Target</span>
@@ -270,11 +271,11 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="space-y-1.5">
                                     <label for="date" class="text-xs font-semibold text-slate-700 dark:text-slate-300 pl-0.5">Start Date</label>
-                                    <input type="date" id="date" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white focus:outline-none focus:border-brand-500">
+                                    <input type="date" id="date" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white focus:outline-none focus:border-brand-500 focus:bg-white dark:focus:bg-slate-950 transition-all">
                                 </div>
                                 <div class="space-y-1.5">
                                     <label for="time" class="text-xs font-semibold text-slate-700 dark:text-slate-300 pl-0.5">Pickup Time</label>
-                                    <input type="time" id="time" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white focus:outline-none focus:border-brand-500">
+                                    <input type="time" id="time" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white focus:outline-none focus:border-brand-500 focus:bg-white dark:focus:bg-slate-950 transition-all">
                                 </div>
                             </div>
                         </div>
@@ -282,13 +283,13 @@
                     </form>
                 </div>
 
-                <!-- RIGHT SIDE PANEL: LIVE CALCULATION INVOICE SUMMARY (Sticky anchoring on Desktop 1024px) -->
+                <!-- RIGHT SIDE PANEL: LIVE CALCULATION INVOICE SUMMARY -->
                 <div class="lg:col-span-5 w-full lg:sticky lg:top-24">
-                    <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-6 shadow-sm">
+                    <div class="rounded-2xl border border-slate-200/60 dark:border-slate-800/80 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-6 shadow-sm text-left">
                         
                         <div>
                             <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Booking Invoice Summary</h3>
-                            <p class="text-xs font-normal text-slate-400 mt-0.5">Real-time live telemetry itemization matrix.</p>
+                            <p class="text-xs font-normal text-slate-400 mt-0.5 dark:text-slate-500">Real-time live telemetry itemization matrix.</p>
                         </div>
 
                         <!-- Calculation Rows Stack -->
@@ -326,7 +327,7 @@
                         <div class="flex justify-between items-center">
                             <div class="space-y-0.5">
                                 <p class="text-sm font-semibold text-slate-900 dark:text-white">Total Amount</p>
-                                <p class="text-[11px] text-slate-400 font-normal">All standard damage protections included</p>
+                                <p class="text-[11px] text-slate-400 dark:text-slate-500 font-normal">All standard damage protections included</p>
                             </div>
                             <span class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight" x-text="'$'+grandTotal">$35</span>
                         </div>
@@ -336,14 +337,14 @@
                             <button 
                                 type="button"
                                 @click="alert('Booking payload transmitted successfully to Vexa Tech processing pipelines.')"
-                                class="w-full text-center bg-brand-500 hover:bg-brand-600 text-white font-medium py-3.5 rounded-xl transition-all text-sm tracking-wide shadow-md shadow-brand-500/10 focus:outline-none"
+                                class="w-full text-center bg-brand-500 hover:bg-brand-600 text-white font-medium py-3.5 rounded-xl transition-all text-sm tracking-wide shadow-md shadow-brand-500/10 focus:outline-none focus:ring-2 focus:ring-brand-500/40"
                             >
                                 Confirm & Initialize Payment
                             </button>
                         </div>
 
                         <!-- Safety Disclaimer notice text footer link framework -->
-                        <p class="text-[11px] text-slate-400 font-normal leading-relaxed text-center px-2">
+                        <p class="text-[11px] text-slate-400 dark:text-slate-500 font-normal leading-relaxed text-center px-2">
                             By initializing checkout payment routing channels, you confirm that you are over 16 years of age and agree to observe regional micro-mobility municipal laws.
                         </p>
 
@@ -361,7 +362,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 
                 <!-- Brand Profile -->
-                <div class="space-y-4">
+                <div class="space-y-4 text-left">
                     <a href="index.html" class="flex items-center gap-2 font-bold text-xl tracking-tight text-slate-900 dark:text-white">
                         <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -373,15 +374,15 @@
                     </p>
                     <!-- Social Icons Platform Container -->
                     <div class="flex items-center gap-3 pt-2">
-                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 transition-colors">
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-500 transition-colors">
                             <span class="sr-only">Facebook</span>
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
                         </a>
-                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 transition-colors">
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-500 transition-colors">
                             <span class="sr-only">Instagram</span>
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.01 3.71.054 1.14.051 1.918.23 2.594.494.7.272 1.29.636 1.88 1.226.58.59.944 1.18 1.216 1.88.264.676.442 1.454.494 2.594.045.925.054 1.276.054 3.71s-.01 2.784-.054 3.71c-.051 1.14-.23 1.918-.494 2.594-.272.7-.636 1.29-1.226 1.88-.59.58-1.18.944-1.88 1.216-.676.264-1.454.442-2.594.494-.925.045-1.276.054-3.71.054s-2.784-.01-3.71-.054c-1.14-.051-1.918-.23-2.594-.494-.7-.272-1.29-.636-1.88-1.226-.58-.59-.944-1.18-1.216-1.88-.264-.676-.442-1.454-.494-2.594C2.01 14.784 2 14.435 2 12s.01-2.784.054-3.71c.051-1.14.23-1.918.494-2.594.272-.7.636-1.29 1.226-1.88.59-.58 1.18-.944 1.88-1.216.676-.264 1.454-.442 2.594-.494.925-.045 1.276-.054 3.71-.054zM12 6.865A5.135 5.135 0 116.865 12 5.135 5.135 0 0112 6.865zm0 8.469a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666zm5.338-8.933a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z" clip-rule="evenodd"/></svg>
                         </a>
-                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 transition-colors">
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 dark:text-slate-400 dark:hover:text-brand-500 transition-colors">
                             <span class="sr-only">Twitter</span>
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
@@ -389,7 +390,7 @@
                 </div>
 
                 <!-- Quick Links Column 1 -->
-                <div>
+                <div class="text-left">
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white tracking-wider uppercase mb-4">Navigation</h3>
                     <ul class="space-y-2 text-sm">
                         <li><a href="index.html" class="hover:text-brand-500 transition-colors">Home</a></li>
@@ -401,29 +402,29 @@
                 </div>
 
                 <!-- Quick Links Column 2 -->
-                <div>
+                <div class="text-left">
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white tracking-wider uppercase mb-4">Experience</h3>
                     <ul class="space-y-2 text-sm">
                         <li><a href="gallery.html" class="hover:text-brand-500 transition-colors">Gallery</a></li>
                         <li><a href="pricing.html" class="hover:text-brand-500 transition-colors">Packages</a></li>
                         <li><a href="booknow.html" class="hover:text-brand-500 transition-colors font-medium text-brand-500">Book now</a></li>
                         <li><a href="404.html" class="hover:text-brand-500 transition-colors">404 Error Page</a></li>
-                        <li><a href="comingsoon.html"class="hover:text-brand-500 transition-colors">Comingsoon</a></li>
+                        <li><a href="comingsoon.html" class="hover:text-brand-500 transition-colors">Comingsoon</a></li>
                     </ul>
                 </div>
 
                 <!-- Newsletter Form Component -->
-                <div class="space-y-4">
+                <div class="space-y-4 text-left">
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white tracking-wider uppercase mb-4">Stay Updated</h3>
                     <p class="text-sm leading-relaxed">Subscribe to get fleet updates, safety tips, and promotional adventure discounts.</p>
                     <form @submit.prevent class="flex flex-col gap-2">
                         <input 
                             type="email" 
                             placeholder="Your email address" 
-                            class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-transparent focus:border-brand-500 text-sm focus:outline-none dark:text-white transition-colors"
+                            class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-transparent dark:border-slate-800 focus:border-brand-500 text-sm focus:outline-none text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-950 transition-all"
                             required
                         >
-                        <button type="submit" class="w-full px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors shadow-sm">
+                        <button type="submit" class="w-full px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500/40">
                             Subscribe
                         </button>
                     </form>
@@ -432,7 +433,7 @@
             </div>
 
             <!-- Copyright footer bar -->
-            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-900 text-center text-xs">
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-900 text-center text-xs text-slate-400 dark:text-slate-500">
                 <p>&copy; 2026 VoltRide Technology Agency. All rights reserved.</p>
             </div>
         </div>

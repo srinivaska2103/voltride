@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CORRECTED SYSTEM SPECIFICATION: INLINE ENCODED SVG ICON LINK -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
     <title>VoltRide | Next-Gen Fleet Launching Soon</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,7 +13,7 @@
     <!-- Premium Clean Font: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -117,21 +117,22 @@
     </header>
 
     <!-- MAIN COMING SOON VIEWPORT LAYER -->
-    <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 xs:px-6 sm:px-8 relative overflow-hidden">
+    <!-- CHANGED: Linked main element to structural theme background layers to prevent edge-to-edge layout flash blocks -->
+    <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 xs:px-6 sm:px-8 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden">
         
         <!-- Blurred Background Depth Elements -->
-        <div class="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full bg-brand-500/5 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full bg-brand-500/5 dark:bg-brand-500/10 blur-3xl pointer-events-none"></div>
 
         <div class="w-full max-w-2xl text-center space-y-8 relative z-10 my-auto">
             
             <!-- Launch Badge -->
             <div class="inline-flex items-center justify-center">
-                <span class="text-xs font-semibold tracking-widest text-brand-500 uppercase bg-brand-500/10 px-3.5 py-1.5 rounded-full border border-brand-500/20 backdrop-blur-md">
+                <span class="text-xs font-semibold tracking-widest text-brand-500 uppercase bg-brand-500/10 dark:bg-brand-500/20 px-3.5 py-1.5 rounded-full border border-brand-500/20 backdrop-blur-md">
                     Micro-Mobility Re-Engineered
                 </span>
             </div>
 
-            <!-- Campaign Headline (Font Weight: 600) -->
+            <!-- Campaign Headline (Font Weight: 700) -->
             <div class="space-y-3 px-2 xs:px-4">
                 <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
                     The Future of Urban Travel <br>
@@ -142,48 +143,50 @@
                 </p>
             </div>
 
-            <!-- RESPONSIVE METRIC COUNTDOWN GRID MATRIX (360px, Mobile, 768px, Desktop responsive) -->
+            <!-- RESPONSIVE METRIC COUNTDOWN GRID MATRIX -->
+            <!-- CHANGED: Reconfigured backgrounds and typography styles on inner layout metrics panels -->
             <div class="grid grid-cols-4 gap-2 xs:gap-3 sm:gap-4 max-w-md mx-auto px-2 xs:px-0 select-none">
                 <!-- Days Card -->
-                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 shadow-sm">
+                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
                     <p class="text-xl xs:text-2xl sm:text-3xl font-semibold tracking-tight text-slate-950 dark:text-white" x-text="String(days).padStart(2, '0')">00</p>
                     <p class="text-[10px] sm:text-xs font-normal text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">Days</p>
                 </div>
                 <!-- Hours Card -->
-                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 shadow-sm">
+                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
                     <p class="text-xl xs:text-2xl sm:text-3xl font-semibold tracking-tight text-slate-950 dark:text-white" x-text="String(hours).padStart(2, '0')">00</p>
                     <p class="text-[10px] sm:text-xs font-normal text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">Hours</p>
                 </div>
                 <!-- Minutes Card -->
-                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 shadow-sm">
+                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
                     <p class="text-xl xs:text-2xl sm:text-3xl font-semibold tracking-tight text-slate-950 dark:text-white" x-text="String(minutes).padStart(2, '0')">00</p>
                     <p class="text-[10px] sm:text-xs font-normal text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">Mins</p>
                 </div>
                 <!-- Seconds Card -->
-                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-brand-500/30 dark:border-brand-500/20 shadow-md">
+                <div class="p-3 xs:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-brand-500/30 dark:border-brand-500/20 shadow-md transition-colors">
                     <p class="text-xl xs:text-2xl sm:text-3xl font-semibold tracking-tight text-brand-500" x-text="String(seconds).padStart(2, '0')">00</p>
                     <p class="text-[10px] sm:text-xs font-normal text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">Secs</p>
                 </div>
             </div>
 
-            <!-- NEWSLETTER CAPTURE COMPONENT (Responsive Input Form Layout Block) -->
+            <!-- NEWSLETTER CAPTURE COMPONENT -->
+            <!-- CHANGED: Re-tuned input background and text states to stand out safely on light & dark systems -->
             <div class="max-w-md mx-auto pt-4 px-4 xs:px-0">
                 <form @submit.prevent="alert('Subscription successful. Early launch loop verified.')" class="w-full flex flex-col xs:flex-row gap-2">
                     <input 
                         type="email" 
                         placeholder="Enter your email address" 
                         required
-                        class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 shadow-sm transition-colors"
+                        class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 focus:bg-white dark:focus:bg-slate-900 shadow-sm transition-all"
                     >
                     <button 
                         type="submit" 
-                        class="w-full xs:w-auto px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors shadow-lg shadow-brand-500/10 shrink-0 whitespace-nowrap"
+                        class="w-full xs:w-auto px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors shadow-lg shadow-brand-500/10 dark:shadow-brand-500/5 shrink-0 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand-500/40"
                     >
                         Notify Me
                     </button>
                 </form>
                 <!-- Context Note -->
-                <p class="text-[11px] text-slate-400 font-normal mt-3 text-center xs:text-left pl-1">
+                <p class="text-[11px] text-slate-400 dark:text-slate-500 font-normal mt-3 text-center xs:text-left pl-1">
                     * Zero spam parameters. Unsubscribe from deployment notifications at any timeline step.
                 </p>
             </div>
