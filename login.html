@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CORRECTED SYSTEM SPECIFICATION: INLINE ENCODED SVG ICON LINK -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
+    <title>VoltRide | Sign In to Your Adventure</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN for interactive state management -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Premium Clean Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+
+    <script>
+        // Tailwind Custom Configuration for Brand Elements
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981', // Emerald primary brand color
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    },
+                    screens: {
+                        'xs': '360px', // Custom ultra-mobile breakpoint specified
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body 
+    x-data="{ 
+        darkMode: localStorage.getItem('darkMode') === 'true', 
+        isRtl: localStorage.getItem('isRtl') === 'true'
+    }"
+    x-init="
+        $watch('darkMode', value => localStorage.setItem('darkMode', value));
+        $watch('isRtl', value => localStorage.setItem('isRtl', value));
+    "
+    :class="{ 'dark': darkMode }"
+    :dir="isRtl ? 'rtl' : 'ltr'"
+    class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300"
+>
+
+    <!-- HEADER / TOP CONTROL BAR -->
+    <header class="w-full bg-transparent absolute top-0 left-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
+            
+            <!-- Name & Logo in Top Left Corner -->
+            <a href="index.html" class="flex items-center gap-2 font-bold text-xl tracking-tight text-slate-900 dark:text-white group focus:outline-none">
+                <svg class="w-8 h-8 text-brand-500 transition-transform group-hover:scale-105" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>Volt<span class="text-brand-500">Ride</span></span>
+            </a>
+
+            <!-- System Control Toggles -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- LTR/RTL Layout Toggle Button -->
+                <button 
+                    @click="isRtl = !isRtl" 
+                    class="px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-500 text-xs font-semibold shadow-sm transition-all focus:outline-none"
+                    title="Toggle Layout Direction"
+                >
+                    <span x-text="isRtl ? 'LTR' : 'RTL'"></span>
+                </button>
+
+                <!-- Dark/Light Mode Toggle Button -->
+                <button 
+                    @click="darkMode = !darkMode" 
+                    class="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 text-slate-500 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-500 shadow-sm transition-all focus:outline-none"
+                    title="Toggle Theme"
+                >
+                    <!-- Sun Icon -->
+                    <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    <!-- Moon Icon -->
+                    <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN LOGIN CONTAINER HUB -->
+    <main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 xs:px-6 sm:px-8">
+        <div class="w-full max-w-md my-auto">
+            
+            <!-- Auth Portal Entry Card Frame -->
+            <div class="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200/60 dark:border-slate-800/80 p-6 xs:p-8 sm:p-10 shadow-xl shadow-slate-100/40 dark:shadow-none transition-all duration-300">
+                
+                <!-- Welcome Title -->
+                <div class="text-center space-y-2 mb-8">
+                    <h1 class="text-2xl xs:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
+                        Welcome back
+                    </h1>
+                    <p class="text-slate-500 dark:text-slate-400 font-normal text-sm">
+                        Enter your credentials to unlock your fleet access.
+                    </p>
+                </div>
+
+                <!-- Interactive Form Matrix -->
+                <form @submit.prevent class="space-y-5">
+                    
+                    <!-- Email input node block -->
+                    <div class="space-y-1.5">
+                        <label for="email" class="text-xs font-semibold text-slate-700 dark:text-slate-300 pl-0.5">
+                            Email Address
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            placeholder="name@example.com"
+                            required
+                            class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors"
+                        >
+                    </div>
+
+                    <!-- Password Input Area with Inside Eye Icon Toggle functionality -->
+                    <div class="space-y-1.5" x-data="{ showPassword: false }">
+                        <label for="password" class="text-xs font-semibold text-slate-700 dark:text-slate-300 pl-0.5">
+                            Password
+                        </label>
+                        <div class="relative">
+                            <input 
+                                :type="showPassword ? 'text' : 'password'" 
+                                id="password" 
+                                name="password"
+                                placeholder="••••••••"
+                                required
+                                class="w-full py-3 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 text-sm font-normal text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-colors"
+                                :class="isRtl ? 'pl-12 pr-4' : 'pr-12 pl-4'"
+                            >
+                            <!-- Eye Toggle Icon Button placed inside bounding box layout -->
+                            <button 
+                                type="button"
+                                @click="showPassword = !showPassword"
+                                class="absolute top-1/2 -translate-y-1/2 p-2 text-slate-400 dark:text-slate-500 hover:text-brand-500 dark:hover:text-brand-500 focus:outline-none transition-colors"
+                                :class="isRtl ? 'left-2' : 'right-2'"
+                                title="Toggle visibility parameters"
+                            >
+                                <!-- Eye Open Icon -->
+                                <svg x-show="showPassword" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                <!-- Eye Closed Icon -->
+                                <svg x-show="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.025 10.025 0 012.42-3.869M8.82 8.82a3 3 0 004.364 4.364m1.314-3.935L19 3m-4.744 4.744L3 19m15.156-4.156A10.016 10.016 0 0021 12c-1.274-4.057-5.064-7-9.542-7-1.447 0-2.823.307-4.06.856" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember me with checkbox & Forgot Password structural row -->
+                    <div class="flex items-center justify-between text-xs font-medium pt-1">
+                        <label class="flex items-center gap-2 text-slate-600 dark:text-slate-400 select-none cursor-pointer">
+                            <input 
+                                type="checkbox" 
+                                class="w-4 h-4 rounded-md border-slate-200 dark:border-slate-800 text-brand-500 focus:ring-brand-500/20 bg-slate-50 dark:bg-slate-950 transition-colors"
+                            >
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="text-brand-500 hover:text-brand-600 transition-colors">Forgot password?</a>
+                    </div>
+
+                    <!-- Core Submit Sign In Action Button (Restricted Weight: 500) -->
+                    <button 
+                        type="submit" 
+                        class="w-full mt-2 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/10 active:scale-[0.99] transition-all focus:outline-none"
+                    >
+                        Sign In
+                    </button>
+
+                </form>
+
+                <!-- Symmetrical Divider Block -->
+                <div class="relative my-6 flex items-center justify-center">
+                    <div class="absolute inset-0 w-full h-[1px] bg-slate-100 dark:bg-slate-800/80 z-0"></div>
+                    <span class="relative z-10 px-3 bg-white dark:bg-slate-900 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                        Or continue with
+                    </span>
+                </div>
+
+                <!-- Federated Social Login Button Grid Matrix (Google, Facebook, Apple) -->
+                <div class="grid grid-cols-3 gap-3">
+                    <!-- Google Link Badge -->
+                    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950/60 text-slate-500 dark:text-slate-400 transition-colors focus:outline-none" title="Sign in with Google">
+                        <span class="sr-only">Google</span>
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                        </svg>
+                    </button>
+                    <!-- Facebook Link Badge -->
+                    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950/60 text-slate-500 dark:text-slate-400 transition-colors focus:outline-none" title="Sign in with Facebook">
+                        <span class="sr-only">Facebook</span>
+                        <svg class="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                        </svg>
+                    </button>
+                    <!-- Apple Link Badge -->
+                    <button class="flex items-center justify-center py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950/60 text-slate-500 dark:text-slate-400 transition-colors focus:outline-none" title="Sign in with Apple">
+                        <span class="sr-only">Apple</span>
+                        <svg class="w-5 h-5 fill-currentColor" viewBox="0 0 24 24">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Secondary Sign Up Footer Option Row (Restricted Weight: 400 - 500) -->
+                <div class="mt-8 text-center text-sm font-normal text-slate-500 dark:text-slate-400">
+                    <span>Don't have an account?</span>
+                    <a href="signup.html" class="text-brand-500 font-medium ml-1 hover:underline underline-offset-4 transition-colors">
+                        Sign up for free
+                    </a>
+                </div>
+
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>

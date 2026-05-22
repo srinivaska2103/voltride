@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CORRECTED SYSTEM SPECIFICATION: INLINE ENCODED SVG ICON LINK -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2310b981' stroke-width='2.5' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M13 10V3L4 14h7v7l9-11h-7z'/></svg>">
+    <title>VoltRide | E-Scooter Rental & Tour Experiences</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN for interactive state management -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Premium Clean Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Custom scrollbar matching brand palette */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 4px;
+        }
+    </style>
+
+    <script>
+        // Tailwind Custom Configuration for Brand Elements
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981', // Emerald primary brand color
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    },
+                    screens: {
+                        'xs': '360px', // Custom ultra-mobile breakpoint specified
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body 
+    x-data="{ 
+        darkMode: localStorage.getItem('darkMode') === 'true', 
+        isRtl: localStorage.getItem('isRtl') === 'true',
+        mobileMenuOpen: false 
+    }"
+    x-init="
+        $watch('darkMode', value => localStorage.setItem('darkMode', value));
+        $watch('isRtl', value => localStorage.setItem('isRtl', value));
+    "
+    :class="{ 'dark': darkMode }"
+    :dir="isRtl ? 'rtl' : 'ltr'"
+    class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300"
+>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+    <!-- Brand Logo & Name -->
+    <a href="index.html" class="flex items-center gap-2 font-bold text-xl tracking-tight text-slate-900 dark:text-white shrink-0">
+        <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <span>Volt<span class="text-brand-500">Ride</span></span>
+    </a>
+
+    <!-- Desktop Menu Links (Visible ONLY at 1024px and up) -->
+    <nav 
+        x-data="{ currentPath: window.location.pathname.split('/').pop() || 'index.html' }"
+        class="hidden lg:flex items-center gap-6 xl:gap-8 text-[15px] font-medium transition-all duration-300"
+    >
+        <!-- Home Link -->
+        <a 
+            href="index.html" 
+            class="transition-colors duration-200 py-1.5"
+            :class="currentPath === 'index.html' ? 'text-brand-500 font-semibold border-b-2 border-brand-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+        >Home</a>
+
+        <!-- Home2 Link -->
+        <a 
+            href="home2.html" 
+            class="transition-colors duration-200 py-1.5"
+            :class="currentPath === 'home2.html' ? 'text-brand-500 font-semibold border-b-2 border-brand-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+        >Home2</a>
+
+        <!-- About Us Link -->
+        <a 
+            href="aboutus.html" 
+            class="transition-colors duration-200 py-1.5"
+            :class="currentPath === 'aboutus.html' ? 'text-brand-500 font-semibold border-b-2 border-brand-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+        >About us</a>
+
+        <!-- Service Link -->
+        <a 
+            href="service.html" 
+            class="transition-colors duration-200 py-1.5"
+            :class="currentPath === 'service.html' ? 'text-brand-500 font-semibold border-b-2 border-brand-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+        >Service</a>
+
+        <!-- Contact Link -->
+        <a 
+            href="contact.html" 
+            class="transition-colors duration-200 py-1.5"
+            :class="currentPath === 'contact.html' ? 'text-brand-500 font-semibold border-b-2 border-brand-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+        >Contact</a>
+
+        <!-- Dashboard Dropdown Container -->
+        <div 
+            x-data="{ open: false }" 
+            @click.outside="open = false" 
+            class="relative"
+        >
+            <!-- Dropdown Trigger Button -->
+            <button 
+                @click="open = !open" 
+                class="flex items-center gap-1 transition-colors focus:outline-none font-medium py-1.5"
+                :class="(open || currentPath === 'user.html') ? 'text-brand-500 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+                aria-haspopup="true"
+                :aria-expanded="open"
+            >
+                <span>Dashboard</span>
+                <svg 
+                    class="w-4 h-4 transition-transform duration-200" 
+                    :class="{ 'rotate-180': open }" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    stroke-width="2.5" 
+                    viewBox="0 0 24 24"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+
+            <!-- Dropdown Menu Options Panel -->
+            <div 
+                x-show="open"
+                x-transition:enter="transition ease-out duration-150"
+                x-transition:enter-start="opacity-0 scale-95 translate-y-1"
+                x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-100"
+                x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                x-transition:leave-end="opacity-0 scale-95 translate-y-1"
+                class="absolute right-0 mt-3 w-56 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-100/50 dark:shadow-none py-2 z-50 transition-colors duration-300"
+                style="display: none;"
+            >
+                <!-- Action Item Links -->
+                <a 
+                    href="user.html" 
+                    class="flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors duration-150"
+                    :class="currentPath === 'user.html' ? 'bg-brand-50/50 dark:bg-brand-500/10 text-brand-500 font-medium' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-brand-500 dark:hover:text-brand-500'"
+                >
+                    <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span>User Profile</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Desktop Utility Controls & Actions (Visible ONLY at 1024px and up) -->
+    <div class="hidden lg:flex items-center gap-4 shrink-0">
+        <!-- LTR/RTL Toggle Button -->
+        <button 
+            @click="isRtl = !isRtl" 
+            class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:text-brand-500 text-slate-500 dark:text-slate-400 transition-all text-xs font-semibold"
+            title="Toggle Layout Direction"
+        >
+            <span x-text="isRtl ? 'LTR' : 'RTL'"></span>
+        </button>
+
+        <!-- Dark/Light Mode Toggle Button -->
+        <button 
+            @click="darkMode = !darkMode" 
+            class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-brand-500 transition-all"
+            title="Toggle Theme"
+        >
+            <svg x-show="darkMode" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <svg x-show="!darkMode" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
+        <!-- CTAs -->
+        <a href="login.html" class="text-slate-700 dark:text-slate-200 hover:text-brand-500 font-medium text-[15px] px-3 py-2 transition-colors">Login</a>
+        <a href="booknow.html" class="bg-brand-500 hover:bg-brand-600 text-white font-medium text-[15px] px-4 py-2.5 rounded-xl transition-all shadow-md shadow-brand-500/10 whitespace-nowrap">Book now</a>
+    </div>
+
+    <!-- Mobile Hamburger Menu Button (Hidden ONLY at 1024px and up) -->
+    <div class="flex items-center lg:hidden">
+        <button 
+            @click="mobileMenuOpen = !mobileMenuOpen" 
+            class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors"
+            aria-label="Toggle Menu"
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" style="display: none;"/>
+            </svg>
+        </button>
+    </div>
+
+</div>
+
+        <!-- MOBILE DRAWER MENU -->
+        <div 
+            x-show="mobileMenuOpen" 
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-4"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-4"
+            class="lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800"
+        >
+  <div 
+    x-data="{ 
+        currentPath: window.location.pathname.split('/').pop() || 'index.html',
+        mobileDashOpen: (window.location.pathname.split('/').pop() === 'user.html')
+    }"
+    class="px-4 pt-2 pb-6 space-y-3 flex flex-col xs:px-6"
+>
+    <!-- Home Link -->
+    <a 
+        href="index.html" 
+        class="block py-2 px-3 rounded-xl font-medium transition-colors"
+        :class="currentPath === 'index.html' ? 'bg-brand-500/10 text-brand-500 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+    >Home</a>
+
+    <!-- Home2 Link -->
+    <a 
+        href="home2.html" 
+        class="block py-2 px-3 rounded-xl font-medium transition-colors"
+        :class="currentPath === 'home2.html' ? 'bg-brand-500/10 text-brand-500 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+    >Home2</a>
+
+    <!-- About Us Link -->
+    <a 
+        href="aboutus.html" 
+        class="block py-2 px-3 rounded-xl font-medium transition-colors"
+        :class="currentPath === 'aboutus.html' ? 'bg-brand-500/10 text-brand-500 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+    >About us</a>
+
+    <!-- Service Link -->
+    <a 
+        href="service.html" 
+        class="block py-2 px-3 rounded-xl font-medium transition-colors"
+        :class="currentPath === 'service.html' ? 'bg-brand-500/10 text-brand-500 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+    >Service</a>
+
+    <!-- Contact Link -->
+    <a 
+        href="contact.html" 
+        class="block py-2 px-3 rounded-xl font-medium transition-colors"
+        :class="currentPath === 'contact.html' ? 'bg-brand-500/10 text-brand-500 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500'"
+    >Contact</a>
+    
+    <!-- Mobile Dashboard Dropdown Accordion Section -->
+    <div class="w-full">
+        <!-- Accordion Toggle Button -->
+        <button 
+            @click="mobileDashOpen = !mobileDashOpen" 
+            class="w-full flex items-center justify-between py-2 px-3 text-slate-600 dark:text-slate-300 font-medium hover:text-brand-500 transition-colors focus:outline-none"
+            :class="(mobileDashOpen || currentPath === 'user.html') ? 'text-brand-500 font-semibold' : ''"
+        >
+            <span>Dashboard</span>
+            <!-- Responsive rotating chevron arrow -->
+            <svg 
+                class="w-4 h-4 transition-transform duration-200" 
+                :class="{ 'rotate-180': mobileDashOpen }" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2.5" 
+                viewBox="0 0 24 24"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <!-- Dropdown Sub-Items Panel -->
+        <div 
+            x-show="mobileDashOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="mt-1 ml-3 pl-4 pr-2 py-2 bg-slate-50 dark:bg-slate-900/60 rounded-xl space-y-1 border border-slate-100 dark:border-slate-800/50"
+            style="display: none;"
+        >
+            <!-- User Profile Link -->
+            <a 
+                href="user.html" 
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] transition-all"
+                :class="currentPath === 'user.html' ? 'bg-white dark:bg-slate-800 text-brand-500 font-medium shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 hover:text-brand-500'"
+            >
+                <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>User Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Unified Layout & Theme Control Row -->
+    <div class="grid grid-cols-2 gap-3 py-2 border-t border-b border-slate-200/60 dark:border-slate-800/80 my-2">
+        
+        <!-- LTR / RTL Direction Toggle Button -->
+        <button 
+            @click="isRtl = !isRtl" 
+            class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-medium text-sm transition-colors focus:outline-none"
+        >
+            <span class="truncate">Layout</span>
+            <span class="text-[11px] font-bold tracking-wider bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-700 dark:text-slate-300 uppercase" x-text="isRtl ? 'RTL' : 'LTR'"></span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle Button -->
+        <button 
+            @click="darkMode = !darkMode" 
+            class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-medium text-sm transition-colors focus:outline-none"
+        >
+            <span x-text="darkMode ? 'Light Mode' : 'Dark Mode'" class="truncate">Theme</span>
+            
+            <!-- Theme Icons Wrapper -->
+            <span class="text-slate-500 dark:text-brand-500 flex items-center justify-center">
+                <!-- Sun Icon (visible in Dark Mode) -->
+                <svg x-show="darkMode" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                <!-- Moon Icon (visible in Light Mode) -->
+                <svg x-show="!darkMode" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+            </span>
+        </button>
+    </div>
+
+    <!-- Login & Book Now CTAs -->
+    <div class="pt-1 flex flex-col gap-3">
+        <a 
+            href="login.html" 
+            class="w-full text-center border font-medium py-2.5 rounded-xl transition-all"
+            :class="currentPath === 'login.html' ? 'border-brand-500 bg-brand-500/5 text-brand-500 font-semibold' : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200'"
+        >Login</a>
+        <a 
+            href="booknow.html" 
+            class="w-full text-center bg-brand-500 text-white font-medium py-2.5 rounded-xl shadow-md transition-all"
+            :class="currentPath === 'booknow.html' ? 'ring-2 ring-brand-500 ring-offset-2 dark:ring-offset-slate-900 font-semibold bg-brand-600' : 'hover:bg-brand-600'"
+        >Book now</a>
+    </div>
+</div>
+        </div>
+    </header>
+
+    <!-- PREMIUM ABOUT-PAGE HERO INFRASTRUCTURE SECTION -->
+<section class="relative min-h-[75vh] lg:min-h-[80vh] w-full flex items-center bg-slate-950 overflow-hidden pt-20">
+    
+    <!-- Sophisticated Abstract Ambient Background Light Ring -->
+    <div class="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-brand-500/10 blur-3xl pointer-events-none z-0"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-4 xs:px-6 sm:px-8 lg:px-12 py-12 sm:py-20">
+        <!-- Asymmetrical Core Grid System Layer (Handles all requested screen variants) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            <!-- Left Grid Pane: Mission & Narrative Text Copy (Takes 7/12 columns on Desktop) -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="space-y-3">
+                    <span class="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-500 border border-brand-500/20 backdrop-blur-md uppercase tracking-wider">
+                        About Our Ride Experience
+                    </span>
+                    <h1 class="text-white font-semibold tracking-tight text-3xl xs:text-4xl sm:text-5xl md:text-6xl leading-[1.15]">
+                        Passion for Travel, <br>
+                        <span class="text-brand-500">Powered by Electric Mobility.</span>
+                    </h1>
+                </div>
+
+                <!-- Subheading Frame (Restricted Font Weight: 400) -->
+                <p class="text-slate-300 font-normal text-sm xs:text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    We help travelers and locals explore cities in a fun, eco-friendly, and unforgettable way through premium e-scooter rentals and guided experiences. More than rentals — it’s an adventure.
+                </p>
+
+                <!-- Fully Responsive CTA Cluster (Adapts across ultra-mobile 360px to Desktop boundaries) -->
+                <div class="pt-4 flex flex-col xs:flex-row items-center justify-center lg:justify-start gap-3 w-full max-w-xs xs:max-w-none mx-auto lg:mx-0 px-4 xs:px-0">
+                    <a 
+                        href="booknow.html" 
+                        class="w-full xs:w-auto px-6 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/10 active:scale-[0.98] transition-all tracking-wide text-center"
+                    >
+                        Explore Cities the Smarter Way
+                    </a>
+                    <a 
+                        href="#our-story" 
+                        class="w-full xs:w-auto px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-medium text-sm rounded-xl backdrop-blur-md active:scale-[0.98] transition-all tracking-wide text-center"
+                    >
+                        Learn Our Story
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Grid Pane: Visual Fleet Feature Showcase Frame (Takes 5/12 columns on Desktop) -->
+            <div class="lg:col-span-5 relative w-full flex items-center justify-center">
+                <!-- Outer Media Frame Geometry -->
+                <div class="relative w-full max-w-[320px] xs:max-w-[340px] sm:max-w-[400px] lg:max-w-none aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] rounded-[2rem] border border-white/10 bg-slate-900 shadow-2xl overflow-hidden group transform lg:rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
+                    
+                    <!-- High-Fidelity Unsplash Asset Mapping -->
+                    <img 
+                        src="assets/abthero" 
+                        alt="High performance modern electric scooter resting elegantly inside a stylized city landscape backdrop" 
+                        class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-102 transition-all duration-700 object-center"
+                        loading="eager"
+                    >
+                    <!-- Visual Scrim Mask Gradient Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60 lg:opacity-40"></div>
+
+                    <!-- Inline Telemetry Floating Overlay Badge (Restricted Font Weight: 500) -->
+                    <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-slate-950/80 border border-white/10 backdrop-blur-md flex items-center justify-between shadow-xl">
+                        <div class="space-y-0.5">
+                            <p class="text-[10px] uppercase font-semibold text-brand-500 tracking-wider">Zero Emission Fleet</p>
+                            <p class="text-xs font-medium text-white">100% Carbon Neutral Track</p>
+                        </div>
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-ping"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- CORPORATE MISSION & HISTORICAL NARRATIVE STORY SECTION -->
+<section id="our-story" class="py-16 sm:py-24 bg-white dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12">
+        
+        <!-- Adaptive Layout Frame Grid (Adjusts dynamically across all viewports) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            <!-- Left Grid Pane: Visual Collage & Branding Anchor (Takes up 5/12 columns on Desktop) -->
+            <div class="lg:col-span-5 relative w-full flex items-center justify-center">
+                <!-- Background ambient decorative blur circle -->
+                <div class="absolute inset-0 bg-brand-500/5 rounded-full blur-3xl scale-90 dark:opacity-40 pointer-events-none"></div>
+                
+                <!-- Main Framing Card Structure Block -->
+               <div class="relative w-full max-w-[320px] xs:max-w-[340px] sm:max-w-[420px] md:max-w-xl lg:max-w-none aspect-[4/3] sm:aspect-[16/10] md:aspect-square lg:aspect-[3/4] rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 shadow-xl overflow-hidden group mx-auto lg:mx-0">
+    <img 
+        src="assets/abt1" 
+        alt="Group of friends preparing to operate modern electric micro-mobility scooters along a city avenue lane" 
+        class="absolute inset-0 w-full h-full object-cover md:object-top opacity-90 mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-102 transition-all duration-700 object-center"
+        loading="lazy"
+    >
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-70"></div>
+    
+    <div class="absolute bottom-6 left-6 right-6 p-5 rounded-2xl bg-slate-950/90 border border-white/10 backdrop-blur-md text-white shadow-2xl text-left">
+        <p class="text-2xl font-bold text-brand-500 tracking-tight">2026</p>
+        <p class="text-xs font-normal text-slate-400 mt-0.5 leading-relaxed">Leading the charge across municipal micro-mobility spaces with reliable zero-emission tech solutions.</p>
+    </div>
+</div>
+            </div>
+
+            <!-- Right Grid Pane: Historical Narrative & Mission Bullet Clusters (Takes up 7/12 columns on Desktop) -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="space-y-3">
+                    <span class="text-xs font-semibold tracking-widest text-brand-500 uppercase bg-brand-500/10 px-3 py-1.5 rounded-full dark:bg-brand-500/20">
+                        Our Genesis & Purpose
+                    </span>
+                    <h2 class="text-2xl xs:text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight max-w-xl mx-auto lg:mx-0">
+                        Rooted in an Absolute Love for Travel and Local Adventure
+                    </h2>
+                </div>
+
+                <!-- Example Content Narrative Core Typography Block (Restricted Font Weight: 400) -->
+                <p class="text-slate-500 dark:text-slate-400 font-normal text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    What started as a simple idea to make urban travel more exciting quickly became a mission to create memorable riding experiences. We believe exploring a city should feel adventurous, effortless, and environmentally friendly. By introducing premium hardware vectors into city transit flows, we transform basic daily commutes into engaging journeys.
+                </p>
+
+                <!-- Granular Mission Inclusions Matrix (Restricted Font Weights: 500) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto lg:mx-0 pt-4 text-left">
+                    
+                    <!-- Mission Cluster item 1: Sustainable Transport -->
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-1">
+                        <div class="flex items-center gap-2 text-brand-500">
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                            <h3 class="text-sm font-semibold text-slate-900 dark:text-white">Sustainable Mission</h3>
+                        </div>
+                        <p class="text-xs font-normal text-slate-400 leading-relaxed">Reducing short-trip tailpipe carbon metrics using high-efficiency electric powercells.</p>
+                    </div>
+
+                    <!-- Mission Cluster item 2: Effortless Exploration -->
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 space-y-1">
+                        <div class="flex items-center gap-2 text-brand-500">
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                            <h3 class="text-sm font-semibold text-slate-900 dark:text-white">Easier City Exploration</h3>
+                        </div>
+                        <p class="text-xs font-normal text-slate-400 leading-relaxed">Bypassing gridlock auto congestion and high parking fees using smart geofenced dock links.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- CORPORATE IDENTITY STRATEGY: MISSION, VISION & SUSTAINABILITY CARDS -->
+<section class="py-16 sm:py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12">
+        
+        <!-- Section Header Area -->
+        <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-20">
+            <span class="text-xs font-semibold tracking-widest text-brand-500 uppercase bg-brand-500/10 px-3 py-1.5 rounded-full dark:bg-brand-500/20">
+                Core Strategic Architecture
+            </span>
+            <h2 class="mt-4 text-2xl xs:text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
+                Driven by Pure Purpose, Engineered for the Future
+            </h2>
+            <p class="mt-3 text-slate-500 dark:text-slate-400 font-normal text-sm sm:text-base">
+                We design clean micro-mobility systems that merge user utility safely with ecological responsibility benchmarks to reshape contemporary metropolitan transit vectors.
+            </p>
+        </div>
+
+        <!-- Split Cards Layout Grid Matrix (360px, Mobile, 768px, 1024px, Desktop Responsive) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+            
+            <!-- Card 1: Our Corporate Mission -->
+            <div class="group flex flex-col p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                
+                <h3 class="mt-6 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">Our Core Mission</h3>
+                
+                <!-- Mission Copy Frame (Restricted Font Weight: 400) -->
+                <p class="mt-3 text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed flex-grow">
+                    To provide safe, sustainable, and enjoyable e-scooter experiences for travelers, commuters, and adventure seekers alike. We create frictionless access points that empower users to control their urban transit journeys completely.
+                </p>
+                
+                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex items-center gap-1.5 text-xs font-semibold text-brand-500 uppercase tracking-wider">
+                    <span>Safety Baseline Verified</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Our Corporate Vision -->
+            <div class="group flex flex-col p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z" />
+                    </svg>
+                </div>
+                
+                <h3 class="mt-6 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">Our Forward Vision</h3>
+                
+                <!-- Vision Copy Frame (Restricted Font Weight: 400) -->
+                <p class="mt-3 text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed flex-grow">
+                    To become the leading eco-friendly mobility and tour experience brand that transforms the way people explore cities. We see a future where urban gridlock is minimized through lightweight, beautifully shared infrastructure.
+                </p>
+                
+                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex items-center gap-1.5 text-xs font-semibold text-brand-500 uppercase tracking-wider">
+                    <span>Global Scaling Target</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Sustainability Pillar -->
+            <div class="group flex flex-col p-6 sm:p-8 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814l-5.62 5.62L7.5 13.313" />
+                    </svg>
+                </div>
+                
+                <h3 class="mt-6 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">Ecological Sustainability</h3>
+                
+                <!-- Sustainability Copy Frame (Restricted Font Weight: 400) -->
+                <p class="mt-3 text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed flex-grow">
+                    We offset 100% of our production lifecycle impact. From smart modular component recovery practices to fully renewable battery energy systems, we are tracking clean targets for a zero carbon footprint landscape.
+                </p>
+                
+                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex items-center gap-1.5 text-xs font-semibold text-brand-500 uppercase tracking-wider">
+                    <span>100% Carbon-Neutral Link</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- SYSTEM VALUE PROPOSITION: WHY CHOOSE US COHORT SECTOR -->
+<section class="py-16 sm:py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12">
+        
+        <!-- Adaptive Multi-Grid Matrix (Splits horizontally on 1024px monitors) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+            
+            <!-- Left Side: Sticky Campaign Intro Context Header Block (Takes up 5/12 columns on Desktop) -->
+            <div class="lg:col-span-5 space-y-4 text-center lg:text-left lg:sticky lg:top-24 w-full">
+                <span class="text-xs font-semibold tracking-widest text-brand-500 uppercase bg-brand-500/10 px-3 py-1.5 rounded-full dark:bg-brand-500/20">
+                    The Platform Advantage
+                </span>
+                <h2 class="text-2xl xs:text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
+                    Engineered to Transform the Way You Move Through the City
+                </h2>
+                <p class="text-slate-500 dark:text-slate-400 font-normal text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    We combine precision micro-mobility vehicle hardware loops with direct local knowledge maps to unlock completely stress-free, carbon-neutral city exploration channels.
+                </p>
+                
+                <!-- Bottom Decorative Call Anchor Link (Restricted Weight: 500) -->
+                <div class="pt-4 hidden lg:block">
+                    <a href="booknow.html" class="inline-flex items-center gap-2 text-sm font-medium text-brand-500 hover:text-brand-600 transition-colors group">
+                        <span>Configure your fleet pack today</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side: Granular Feature Cards Cluster (Takes up 7/12 columns on Desktop) -->
+            <div class="lg:col-span-7 space-y-4 w-full text-left">
+                
+                <!-- Feature Card 1: Premium Fleet -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.68-.69-1.8-1-2.84-.74-1.04.26-1.8 1.02-2.06 2.06a3.29 3.29 0 003.16 4.1c1 .01 1.95-.45 2.5-1.25m6.44-8.42c.69-.68 1-1.8.74-2.84-.26-1.04-1.02-1.8-2.06-2.06a3.29 3.29 0 00-4.1 3.16c-.01 1 .45 1.95 1.25 2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Premium High-Performance Fleet</h3>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Access modern, safe, and fully maintained electric scooters undergoes technical multi-stage turnaround calibrations daily.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature Card 2: Eco-Friendly Travel -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A11.952 11.952 0 0112 16.5c-2.998 0-5.74-1.1-7.843-2.918M4.157 8.582A8.959 8.959 0 003 12c0 .778.099 1.533.284 2.253" />
+                        </svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Eco-Friendly Local Travel</h3>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Drastically reduce urban tailpipe carbon emissions while enjoying unhindered access to tight landmark corridors.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature Card 3: Local Guided Tours -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z" />
+                        </svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Expert Local Guided Tours</h3>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Discover hidden municipal gems and historic cultural networks directly alongside certified local storytelling guides.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature Card 4: Easy Online Booking -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Frictionless Online Booking</h3>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Fast, hassle-free online reservation pipelines ensure your chosen vehicle parameters are fully prepped and locked prior to dispatch.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature Card 5: Safety First -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 dark:hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751A11.956 11.956 0 0112 2.714z" />
+                        </svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Absolute Safety First Infrastructure</h3>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">
+                            High-impact comfort helmets, 24/7 telematics support links, and detailed baseline tracking instructions are provided out of the box.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- PREMIUM MINIMALIST MEET THE TEAM SECTION -->
+<section class="py-16 sm:py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12">
+        
+        <!-- Section Header Area -->
+        <div class="max-w-3xl mx-auto text-center mb-16 sm:mb-24">
+            <span class="text-xs font-semibold tracking-widest text-brand-500 uppercase bg-brand-500/10 px-3 py-1.5 rounded-full dark:bg-brand-500/20">
+                The Minds Behind the Fleet
+            </span>
+            <h2 class="mt-4 text-2xl xs:text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
+                Meet Our Local Ride Experts
+            </h2>
+            <p class="mt-3 text-slate-500 dark:text-slate-400 font-normal text-sm sm:text-base">
+                Our passionate team of riders, travel lovers, and local experts work together to create smooth, exciting, and safe experiences for every customer.
+            </p>
+        </div>
+
+        <!-- Team Profile Cards Grid Matrix (360px, Mobile, 768px, 1024px, Desktop Responsive) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 max-w-6xl mx-auto text-center">
+            
+            <!-- Member 1: Founder -->
+            <div class="flex flex-col items-center group">
+                <!-- Circular Avatar Wrapper with Interactive Scale Zoom & Scrim Overlay -->
+                <div class="relative w-40 h-40 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                    <div class="w-full h-full rounded-full overflow-hidden relative">
+                        <img 
+                            src="assets/hohn" 
+                            alt="Srinivas K A, CEO and Founder" 
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300 object-center"
+                            loading="lazy"
+                        >
+                        <!-- Hover Social Icons Overlay Layer -->
+                        <div class="absolute inset-0 bg-brand-500/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
+                            <a href="#" class="text-white hover:scale-110 transition-transform" title="LinkedIn Profile">
+                                <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Identity Text Elements -->
+                <div class="mt-4 space-y-0.5">
+                    <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">John</h3>
+                    <p class="text-xs font-medium text-brand-500 uppercase tracking-wider">CEO & Founder</p>
+                </div>
+            </div>
+
+            <!-- Member 2: Tour Guides Representative -->
+            <div class="flex flex-col items-center group">
+                <div class="relative w-40 h-40 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                    <div class="w-full h-full rounded-full overflow-hidden relative">
+                        <img 
+                            src="assets/e2" 
+                            alt="Heamanath, Chief Technology & Tour Operations" 
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300 object-center"
+                            loading="lazy"
+                        >
+                        <div class="absolute inset-0 bg-brand-500/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
+                            <a href="#" class="text-white hover:scale-110 transition-transform" title="LinkedIn Profile">
+                                <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 space-y-0.5">
+                    <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Heamanath</h3>
+                    <p class="text-xs font-medium text-brand-500 uppercase tracking-wider">Lead Route Guide</p>
+                </div>
+            </div>
+
+            <!-- Member 3: Support Team Representative -->
+            <div class="flex flex-col items-center group">
+                <div class="relative w-40 h-40 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                    <div class="w-full h-full rounded-full overflow-hidden relative">
+                        <img 
+                            src="assets/t3" 
+                            alt="Tejeshwar M G, Support Network Supervisor" 
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300 object-center"
+                            loading="lazy"
+                        >
+                        <div class="absolute inset-0 bg-brand-500/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
+                            <a href="#" class="text-white hover:scale-110 transition-transform" title="LinkedIn Profile">
+                                <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 space-y-0.5">
+                    <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Juli</h3>
+                    <p class="text-xs font-medium text-brand-500 uppercase tracking-wider">Customer Relations</p>
+                </div>
+            </div>
+
+            <!-- Member 4: Mechanics / Maintenance Team -->
+            <div class="flex flex-col items-center group">
+                <div class="relative w-40 h-40 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-2 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                    <div class="w-full h-full rounded-full overflow-hidden relative">
+                        <img 
+                            src="assets/e3" 
+                            alt="Sree Sabarish, Fleet Engineering and Safety Diagnostics" 
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300 object-center"
+                            loading="lazy"
+                        >
+                        <div class="absolute inset-0 bg-brand-500/80 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
+                            <a href="#" class="text-white hover:scale-110 transition-transform" title="LinkedIn Profile">
+                                <svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 space-y-0.5">
+                    <h3 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Sree</h3>
+                    <p class="text-xs font-medium text-brand-500 uppercase tracking-wider">Fleet Engineer</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- INTERACTIVE TELEMETRY & METRIC STATS SECTION -->
+<!-- SYSTEM RECONFIGURED APERIODIC STATISTICS METRIC MESH GRID -->
+<section class="py-16 sm:py-24 bg-white dark:bg-slate-950 transition-colors duration-300 select-none overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12">
+        
+        <!-- Adaptive Layout Container (5 Columns on Desktop, remapping to a symmetric 6-column matrix at 768px) -->
+        <div 
+            x-data="{ 
+                stats: [
+                    { id: 'riders', current: 0, target: 10000, suffix: '+', label: 'Happy Riders', desc: 'Active platform loops verified' },
+                    { id: 'tours', current: 0, target: 5000, suffix: '+', label: 'Tours Completed', desc: 'Guided group orientations' },
+                    { id: 'scooters', current: 0, target: 100, suffix: '+', label: 'Premium Scooters', desc: 'High performance hardware' },
+                    { id: 'rating', current: 0, target: 4.9, suffix: '', label: 'Customer Rating', desc: 'Five-star feedback loops' },
+                    { id: 'routes', current: 0, target: 20, suffix: '+', label: 'Scenic Routes', desc: 'Curated localized maps' }
+                ],
+                animateCounters() {
+                    this.stats.forEach(stat => {
+                        let start = 0;
+                        let duration = 2000;
+                        let startTime = null;
+
+                        const step = (timestamp) => {
+                            if (!startTime) startTime = timestamp;
+                            const progress = Math.min((timestamp - startTime) / duration, 1);
+                            
+                            if (stat.id === 'rating') {
+                                stat.current = parseFloat((progress * stat.target).toFixed(1));
+                            } else {
+                                stat.current = Math.floor(progress * stat.target);
+                            }
+
+                            if (progress < 1) {
+                                window.requestAnimationFrame(step);
+                            }
+                        };
+                        window.requestAnimationFrame(step);
+                    });
+                }
+            }"
+            x-init="setTimeout(() => { animateCounters() }, 200)"
+            <!-- CHANGED: Applied md:grid-cols-6 to establish a balanced tablet layout matrix -->
+            class="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto"
+        >
+            
+            <!-- Metric 1: Happy Riders -->
+            <!-- CHANGED: Added md:col-span-2 for 768px viewports -->
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 text-center flex flex-col justify-between group hover:border-brand-500/30 transition-colors col-span-1 md:col-span-3 lg:col-span-1 shadow-sm">
+                <div class="space-y-2">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="stats[0].label">Happy Riders</div>
+                    <div class="text-2xl xs:text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+                        <span x-text="stats[0].current.toLocaleString()">0</span><span class="text-brand-500" x-text="stats[0].suffix">+</span>
+                    </div>
+                </div>
+                <p class="text-[11px] font-normal text-slate-400 dark:text-slate-500 mt-2 leading-relaxed" x-text="stats[0].desc">Active platform loops verified</p>
+            </div>
+
+            <!-- Metric 2: Tours Completed -->
+            <!-- CHANGED: Added md:col-span-2 for 768px viewports -->
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 text-center flex flex-col justify-between group hover:border-brand-500/30 transition-colors col-span-1 md:col-span-3 lg:col-span-1 shadow-sm">
+                <div class="space-y-2">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="stats[1].label">Tours Completed</div>
+                    <div class="text-2xl xs:text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+                        <span x-text="stats[1].current.toLocaleString()">0</span><span class="text-brand-500" x-text="stats[1].suffix">+</span>
+                    </div>
+                </div>
+                <p class="text-[11px] font-normal text-slate-400 dark:text-slate-500 mt-2 leading-relaxed" x-text="stats[1].desc">Guided group orientations</p>
+            </div>
+
+            <!-- Metric 3: Premium Scooters -->
+            <!-- CHANGED: Added md:col-span-2 for 768px viewports -->
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 text-center flex flex-col justify-between group hover:border-brand-500/30 transition-colors col-span-1 md:col-span-2 lg:col-span-1 shadow-sm">
+                <div class="space-y-2">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="stats[2].label">Premium Scooters</div>
+                    <div class="text-2xl xs:text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+                        <span x-text="stats[2].current">0</span><span class="text-brand-500" x-text="stats[2].suffix">+</span>
+                    </div>
+                </div>
+                <p class="text-[11px] font-normal text-slate-400 dark:text-slate-500 mt-2 leading-relaxed" x-text="stats[2].desc">High performance hardware</p>
+            </div>
+
+            <!-- Metric 4: Customer Rating -->
+            <!-- CHANGED: Added md:col-span-2 for 768px viewports -->
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 text-center flex flex-col justify-between group hover:border-brand-500/30 transition-colors col-span-1 md:col-span-2 lg:col-span-1 shadow-sm">
+                <div class="space-y-2">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="stats[3].label">Customer Rating</div>
+                    <div class="text-2xl xs:text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white flex items-center justify-center gap-1">
+                        <span x-text="stats[3].current.toFixed(1)">0.0</span>
+                        <svg class="w-5 h-5 text-brand-500 fill-currentColor shrink-0 transform -translate-y-0.5" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                </div>
+                <p class="text-[11px] font-normal text-slate-400 dark:text-slate-500 mt-2 leading-relaxed" x-text="stats[3].desc">Five-star feedback loops</p>
+            </div>
+
+            <!-- Metric 5: Scenic Routes -->
+            <!-- CHANGED: Reconfigured md:col-span-2 to beautifully bridge across the bottom row on tablet screens -->
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 text-center flex flex-col justify-between group hover:border-brand-500/30 transition-colors col-span-2 md:col-span-2 lg:col-span-1 shadow-sm">
+                <div class="space-y-2">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="stats[4].label">Scenic Routes</div>
+                    <div class="text-2xl xs:text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
+                        <span x-text="stats[4].current">0</span><span class="text-brand-500" x-text="stats[4].suffix">+</span>
+                    </div>
+                </div>
+                <p class="text-[11px] font-normal text-slate-400 dark:text-slate-500 mt-2 leading-relaxed" x-text="stats[4].desc">Curated localized maps</p>
+            </div>
+
+        </div>
+        
+    </div>
+</section>
+<!-- PREMIUM SAFETY & MOBILITY RESPONSIBILITY SECTION -->
+<section class="py-16 sm:py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 xs:px-6 sm:px-8 lg:px-12">
+        
+        <!-- Section Header Area -->
+        <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-20">
+            <span class="text-xs font-semibold tracking-widest text-brand-500 uppercase bg-brand-500/10 px-3 py-1.5 rounded-full dark:bg-brand-500/20">
+                Operations Safety Matrix
+            </span>
+            <h2 class="mt-4 text-2xl xs:text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
+                Your Safety & Compliance Is Our Absolute Focus
+            </h2>
+            <p class="mt-3 text-slate-500 dark:text-slate-400 font-normal text-sm sm:text-base">
+                We combine regular structural vehicle diagnostics with modern geofenced telemetry logs to maintain clean, accident-free municipal travel loops.
+            </p>
+        </div>
+
+        <!-- Asymmetrical Split Layout Grid Matrix (360px, Mobile, 768px, 1024px, Desktop Responsive) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            <!-- LEFT PANEL: OPERATIONS SAFETY CARDS MATRIX (Takes 7/12 columns on Desktop) -->
+            <div class="lg:col-span-7 space-y-4 w-full text-left">
+                
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 pl-1 mb-2">Our Operational Protocols</h3>
+
+                <!-- Safety Item 1: Regular Maintenance -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.67 2.67 0 1113.5 17.25l-5.83-5.83m0 0a2.67 2.67 0 113.75-3.75l5.83 5.83m-9.58-5.83l-5.83 5.83z"/></svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h4 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Regular Hardware Tuning</h4>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">Every vehicle undergoes rigorous mechanical tuning checks, brake tracking, and tire optimization loops daily.</p>
+                    </div>
+                </div>
+
+                <!-- Safety Item 2: Pre-Ride Safety Check -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h4 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Digital Pre-Ride Safety Checks</h4>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">Our application framework guides users through a clear 30-second inspection check before unlocking battery lines.</p>
+                    </div>
+                </div>
+
+                <!-- Safety Item 3: Sanitized Helmets -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h4 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Sanitized Safety Helmets</h4>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">Comfort helmets are cleaned, checked, and treated with certified protective sanitization agents after every booking cycle.</p>
+                    </div>
+                </div>
+
+                <!-- Safety Item 4: Beginner Guidance -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h4 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">Beginner-Friendly Ride Support</h4>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">First-time riders can enable an electronic "Eco-Mode Limit Tracker" to automatically smooth throttle acceleration steps.</p>
+                    </div>
+                </div>
+
+                <!-- Safety Item 5: GPS Support -->
+                <div class="group p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/60 dark:border-slate-800/80 hover:border-brand-500/30 transition-all duration-200 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center shrink-0 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z"/></svg>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h4 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight">GPS-Enabled Geofenced Protection</h4>
+                        <p class="text-sm font-normal text-slate-500 dark:text-slate-400 leading-relaxed">Real-time geofence arrays immediately communicate location parameters if vehicles enter restricted municipal walk-zones.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT PANEL: RIDE RESPONSIBLY BEHAVIORAL HIGHLIGHTS (Takes 5/12 columns on Desktop) -->
+            <div class="lg:col-span-5 w-full lg:sticky lg:top-24 bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-[2rem] p-6 xs:p-8 text-left shadow-sm">
+                <div class="space-y-1.5 mb-6">
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-brand-500">Extra Core Advice</h3>
+                    <p class="text-lg font-semibold tracking-tight text-slate-900 dark:text-white">Ride Responsibly Guidelines</p>
+                    <p class="text-xs font-normal text-slate-400">Observe standard commuter compliance laws to preserve a safe, clean neighborhood tracking system.</p>
+                </div>
+
+                <div class="space-y-4 text-sm font-normal text-slate-600 dark:text-slate-400">
+                    <!-- Tip 1 -->
+                    <div class="flex gap-3 items-start">
+                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center text-[10px] font-semibold shrink-0 mt-0.5">A</span>
+                        <p class="leading-relaxed"><strong class="font-medium text-slate-900 dark:text-white">Stick to Designated Transit Lanes:</strong> Operate e-scooters inside municipal bicycle tracks or public roads. Avoid sidewalk pedestrian spaces completely.</p>
+                    </div>
+
+                    <!-- Tip 2 -->
+                    <div class="flex gap-3 items-start">
+                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center text-[10px] font-semibold shrink-0 mt-0.5">B</span>
+                        <p class="leading-relaxed"><strong class="font-medium text-slate-900 dark:text-white">Single-Rider Restrictions:</strong> Fleet hardware structures are optimized for a single individual. Dual-passenger riding compromises steering safety metrics.</p>
+                    </div>
+
+                    <!-- Tip 3 -->
+                    <div class="flex gap-3 items-start">
+                        <span class="w-5 h-5 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center text-[10px] font-semibold shrink-0 mt-0.5">C</span>
+                        <p class="leading-relaxed"><strong class="font-medium text-slate-900 dark:text-white">Observe Geofenced Parking Docks:</strong> Always secure your rental setup inside marked system return zones to eliminate public pathway obstruction lines.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-800">
+                    <a href="safety-matrix.html" class="block w-full text-center py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium text-xs rounded-xl shadow-md shadow-brand-500/10 transition-colors focus:outline-none">
+                        Review Full Compliance Matrix
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<section>
+      <div class="max-w-7xl mx-auto w-full px-4 xs:px-6 sm:px-8 lg:px-12">
+            
+            <!-- Dual-Layered Focal Container Box -->
+            <div class="relative rounded-[2.5rem] bg-slate-950 border border-slate-800/80 px-6 py-12 xs:py-16 sm:px-12 sm:py-20 lg:px-16 text-center overflow-hidden shadow-2xl shadow-slate-950/40">
+                
+                <!-- High-Fidelity Blurred Ambient Background Gradient Accents -->
+                <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-brand-500/10 blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+
+                <!-- Core Copy Context -->
+                <div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
+                    
+                    <!-- Micro Campaign Pill Badge -->
+                    <span class="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-[11px] font-semibold bg-brand-500/10 text-brand-500 border border-brand-500/20 backdrop-blur-md uppercase tracking-wider mb-6">
+                        Explore Smarter • Ride Greener
+                    </span>
+
+                    <!-- Main Segment Headlines (Restricted Font Weight: 600) -->
+                    <h2 class="text-white font-semibold tracking-tight text-2xl xs:text-3xl sm:text-4xl md:text-5xl leading-[1.15] sm:leading-tight">
+                        Ready to Ride With Us? <br class="hidden sm:inline">
+                        <span class="text-brand-500">Discover the City Differently.</span>
+                    </h2>
+
+                    <!-- Explanatory Subheading Support Paragraph (Restricted Font Weight: 400) -->
+                    <p class="mt-6 text-slate-300/90 font-normal text-sm xs:text-base sm:text-lg leading-relaxed max-w-xl">
+                        Your next adventure starts here. Secure your premium high-range electric scooter instantly and experience seamless municipal travel lanes.
+                    </p>
+
+                    <!-- Fully Responsive CTA Action Buttons (Adapts beautifully across all 5 breakpoints) -->
+                    <div class="mt-8 sm:mt-10 w-full max-w-xs sm:max-w-none flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4 xs:px-0">
+                        
+                        <!-- Primary CTA Button: Book a Scooter -->
+                        <a 
+                            href="booknow.html" 
+                            class="w-full sm:w-auto px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl shadow-lg shadow-brand-500/20 active:scale-[0.98] transition-all tracking-wide text-center"
+                        >
+                            Book a Scooter
+                        </a>
+
+                        <!-- Secondary Info Anchor -->
+                        <a 
+                            href="service.html" 
+                            class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/15 text-white font-medium text-sm rounded-xl border border-white/10 backdrop-blur-md active:scale-[0.98] transition-all tracking-wide text-center"
+                        >
+                            Explore Tour Packages
+                        </a>
+                    </div>
+
+                    <!-- Trust Indicators Grid Frame (Restricted Font Weight: 400) -->
+                    <div class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-400 font-normal tracking-wide border-t border-white/[0.06] w-full pt-6">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                            Instant App Unlock
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                            Helmets & Safety Gear Included
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                            Flexible Cancellation Loops
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+</section>
+  <!-- FOOTER COMPONENT -->
+    <footer class="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                
+                <!-- Brand Profile -->
+                <div class="space-y-4">
+                    <a href="index.html" class="flex items-center gap-2 font-bold text-xl tracking-tight text-slate-900 dark:text-white">
+                        <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span>Volt<span class="text-brand-500">Ride</span></span>
+                    </a>
+                    <p class="text-sm leading-relaxed">
+                        Redefining urban commuting and sightseeing through premium, sustainable micro-mobility workflows across the globe.
+                    </p>
+                    <!-- Social Icons Platform Container -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 transition-colors">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 transition-colors">
+                            <span class="sr-only">Instagram</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.01 3.71.054 1.14.051 1.918.23 2.594.494.7.272 1.29.636 1.88 1.226.58.59.944 1.18 1.216 1.88.264.676.442 1.454.494 2.594.045.925.054 1.276.054 3.71s-.01 2.784-.054 3.71c-.051 1.14-.23 1.918-.494 2.594-.272.7-.636 1.29-1.226 1.88-.59.58-1.18.944-1.88 1.216-.676.264-1.454.442-2.594.494-.925.045-1.276.054-3.71.054s-2.784-.01-3.71-.054c-1.14-.051-1.918-.23-2.594-.494-.7-.272-1.29-.636-1.88-1.226-.58-.59-.944-1.18-1.216-1.88-.264-.676-.442-1.454-.494-2.594C2.01 14.784 2 14.435 2 12s.01-2.784.054-3.71c.051-1.14.23-1.918.494-2.594.272-.7.636-1.29 1.226-1.88.59-.58 1.18-.944 1.88-1.216.676-.264 1.454-.442 2.594-.494.925-.045 1.276-.054 3.71-.054zM12 6.865A5.135 5.135 0 116.865 12 5.135 5.135 0 0112 6.865zm0 8.469a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666zm5.338-8.933a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z" clip-rule="evenodd"/></svg>
+                        </a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-500 hover:text-brand-500 transition-colors">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column 1 -->
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white tracking-wider uppercase mb-4">Navigation</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-brand-500 transition-colors">Home</a></li>
+                        <li><a href="home2.html" class="hover:text-brand-500 transition-colors">Home2</a></li>
+                        <li><a href="aboutus.html" class="hover:text-brand-500 transition-colors">About us</a></li>
+                        <li><a href="service.html" class="hover:text-brand-500 transition-colors">Service</a></li>
+                        <li><a href="contact.html" class="hover:text-brand-500 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links Column 2 -->
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white tracking-wider uppercase mb-4">Experience</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="gallery.html" class="hover:text-brand-500 transition-colors">Gallery</a></li>
+                        <li><a href="pricing.html" class="hover:text-brand-500 transition-colors">Packages</a></li>
+                        <li><a href="booknow.html" class="hover:text-brand-500 transition-colors font-medium text-brand-500">Book now</a></li>
+                        <li><a href="404.html" class="hover:text-brand-500 transition-colors">404 Error Page</a></li>
+                        <li><a href="comingsoon.html"class="hover:text-brand-500 transition-colors">Comingsoon</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Form Component -->
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-white tracking-wider uppercase mb-4">Stay Updated</h3>
+                    <p class="text-sm leading-relaxed">Subscribe to get fleet updates, safety tips, and promotional adventure discounts.</p>
+                    <form @submit.prevent class="flex flex-col gap-2">
+                        <input 
+                            type="email" 
+                            placeholder="Your email address" 
+                            class="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-transparent focus:border-brand-500 text-sm focus:outline-none dark:text-white transition-colors"
+                            required
+                        >
+                        <button type="submit" class="w-full px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm rounded-xl transition-colors shadow-sm">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Copyright footer bar -->
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-900 text-center text-xs">
+                <p>&copy; 2026 VoltRide Technology Agency. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
