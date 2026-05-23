@@ -143,22 +143,18 @@
             <!-- Bottom Static User Profiler & Secure Logout Node -->
             <!-- CHANGED: Re-tuned structure to feature a high-contrast functional logoff option wrapper link -->
             <div class="p-4 border-t border-slate-200/60 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-950/20 space-y-3">
-                <div class="flex items-center gap-3 px-2 py-1.5">
-                    <div class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-semibold text-xs text-slate-700 dark:text-slate-300 shrink-0">SK</div>
-                    <div class="flex-grow min-w-0 text-left">
-                        <p class="text-xs font-semibold text-slate-900 dark:text-white truncate">Srinivas K A</p>
-                        <p class="text-[10px] text-slate-400 dark:text-slate-500 truncate">Premium Rider Profile</p>
-                    </div>
-                </div>
-                <button 
-                    @click="logoutSecurely()" 
-                    class="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 hover:bg-slate-200 dark:bg-slate-950 dark:hover:bg-slate-900/60 text-slate-700 dark:text-slate-300 font-medium text-xs transition-all focus:outline-none"
-                >
-                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                    </svg>
-                    <span>Terminate Session</span>
-                </button>
+               
+               <!-- SYSTEM RECONFIGURED: HIGH-VISIBILITY DESTRUCTIVE LOGOUT COMPONENT -->
+<!-- CHANGED: Swapped gray background classes for adaptive red color tokens and red focus matrices -->
+<button 
+    @click="logoutSecurely()" 
+    class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-red-200/60 dark:border-red-900/30 bg-red-50 hover:bg-red-100 dark:bg-red-950/20 dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 font-semibold text-xs tracking-wide transition-all focus:outline-none focus:ring-2 focus:ring-red-500/20 shrink-0 select-none"
+>
+    <svg class="w-4 h-4 text-red-500 dark:text-red-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+    </svg>
+    <span>Terminate Session</span>
+</button>
             </div>
         </aside>
 
@@ -166,34 +162,67 @@
         <main class="flex-grow flex flex-col min-w-0 overflow-hidden relative bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
             
             <!-- APPLICATION CONTROLS TOPOBAR HUB -->
-            <header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between px-4 xs:px-6 shrink-0 z-40">
-                <div class="flex items-center gap-3">
-                    <button @click="mobileMenuOpen = true" class="p-2 -ml-2 text-slate-500 dark:text-slate-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    </button>
-                    <h2 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight capitalize" x-text="activeTab.replace('-', ' ')">Dashboard</h2>
-                </div>
+           <!-- SYSTEM RECONFIGURED: FIXED TOP BAR WITH INTEGRATED NOTIFICATION HUB -->
+<header class="h-20 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between px-4 xs:px-6 shrink-0 z-40 transition-colors duration-200">
+    
+    <!-- Left Section: Mobile Trigger & Dynamic Title -->
+    <div class="flex items-center gap-3">
+        <button @click="mobileMenuOpen = true" class="p-2 -ml-2 text-slate-500 dark:text-slate-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden focus:outline-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+        <h2 class="text-base font-semibold text-slate-900 dark:text-white tracking-tight capitalize" x-text="activeTab.replace('-', ' ')">Dashboard</h2>
+    </div>
 
-                <!-- INTEGRATED PERSISTENT CONFIGURATION SWITCHERS (LTR & DARK MODE) -->
-                <div class="flex items-center gap-2">
-                    <!-- Config A: System Layout Text Direction Link (LTR/RTL LocalStorage) -->
-                    <button @click="toggleRtl()" 
-                            class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900 text-xs font-medium tracking-wider uppercase transition-colors text-slate-700 dark:text-slate-300 focus:outline-none"
-                            title="Toggle Document Layout Direction Paradigm">
-                        <span x-text="isRtl ? 'LTR' : 'RTL'">LTR</span>
-                    </button>
+    <!-- Center/Right Section: Combined User Profile, Notification Hub & Toggles -->
+    <div class="flex items-center gap-4">
+        
+        <!-- User Profiler Badge (Hidden on ultra-small breakpoints for spacing health) -->
+        <div class="hidden sm:flex items-center gap-3 px-2 py-1.5 border-r border-slate-200 dark:border-slate-800/60 ltr:pr-4 rtl:pl-4">
+            <div class="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-semibold text-xs text-slate-700 dark:text-slate-300 shrink-0">SK</div>
+            <div class="flex-grow min-w-0 text-left">
+                <p class="text-xs font-semibold text-slate-900 dark:text-white truncate">Srinivas K A</p>
+                <p class="text-[10px] text-slate-400 dark:text-slate-500 truncate">Premium Rider Profile</p>
+            </div>
+        </div>
 
-                    <!-- Config B: Lighting Mode Paradigm Trigger (Dark/Light LocalStorage) -->
-                    <button @click="toggleDark()" 
-                            class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors focus:outline-none"
-                            title="Toggle Light Dark Layout Values">
-                        <!-- Sun Icon -->
-                        <svg x-show="darkMode" class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                        <!-- Moon Icon -->
-                        <svg x-show="!darkMode" class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                    </button>
-                </div>
-            </header>
+        <!-- UTILITY INTERACTIVE ACTIONS STACK -->
+        <div class="flex items-center gap-2">
+            
+            <!-- INJECTED: Premium Notification Bell Component with Telemetry Alert Dot -->
+            <button class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-brand-500 transition-all relative focus:outline-none shrink-0 shadow-sm" title="View Real-Time Security Alerts">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                </svg>
+                <!-- Pulse Dot Status Marker -->
+                <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-brand-500 ring-2 ring-white dark:ring-slate-950 animate-pulse"></span>
+            </button>
+
+            <!-- Config A: System Layout Text Direction Link -->
+            <button @click="toggleRtl()" 
+                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900 text-xs font-bold tracking-wider uppercase transition-colors text-slate-700 dark:text-slate-300 focus:outline-none shrink-0 shadow-sm"
+                    title="Toggle Document Layout Direction Paradigm">
+                <span x-text="isRtl ? 'LTR' : 'RTL'">LTR</span>
+            </button>
+
+            <!-- Config B: Lighting Mode Paradigm Trigger -->
+            <button @click="toggleDark()" 
+                    class="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors focus:outline-none shrink-0 shadow-sm"
+                    title="Toggle Light Dark Layout Values">
+                <!-- Sun Icon -->
+                <svg x-show="darkMode" class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                <!-- Moon Icon -->
+                <svg x-show="!darkMode" class="w-4 h-4 text-slate-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+            </button>
+            
+        </div>
+    </div>
+</header>
 
             <!-- SCROLLABLE SUB-ROUTE WINDOW PANEL MATRIX -->
             <div class="flex-grow p-4 xs:p-6 overflow-y-auto space-y-6 bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
